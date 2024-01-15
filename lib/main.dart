@@ -1,4 +1,4 @@
-import 'package:codehub/View/onBoardingScreen/Screen.dart';
+import 'package:codehub/Screens/onBoardingScreen/Screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
