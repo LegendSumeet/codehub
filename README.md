@@ -1,6 +1,4 @@
-Certainly! Below is a brief template for your README file:
 
----
 
 # CodeHub - Your Tech Events Companion
 
