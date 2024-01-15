@@ -40,6 +40,4 @@ If you're interested in contributing to CodeHub, check out our [Contribution Gui
 
 This project is licensed under the [MIT License](LICENSE).
 
----
-
-Feel free to customize this template based on your specific app details, repository structure, and any additional information you'd like to include.
+postgresql://LegendSumeet:qoH9ECk2lvrX@ep-steep-truth-a5297ohd.us-east-2.aws.neon.tech/CodehubDB?sslmode=require
