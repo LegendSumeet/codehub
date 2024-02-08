@@ -1,0 +1,406 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../../Contants/app_style.dart';
+import '../../widgets/SizeConfig.dart';
+import '../eventdetails/eventpage.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<String> categories = [
+    'Tech Bootcamps',
+    'Hackathon',
+    'Programs',
+    'Conferences',
+  ];
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    return Scaffold(
+      backgroundColor: kBlack0D,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: kPadding28,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    BuildText("Explore", MediaQuery.of(context).size.width, 35,
+                        Colors.white),
+                    GestureDetector(
+                      onTap: () => debugPrint('Search Tapped!'),
+                      child: const Icon(
+                        Icons.search_sharp,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: kPadding12,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: kPadding28,
+                ),
+                child: Container(
+                  height: 4,
+                  width: SizeConfig.blockSizeHorizontal! * 10,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      SizeConfig.blockSizeHorizontal! * 10,
+                    ),
+                    color: kBlueAzure4A,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: kPadding16,
+              ),
+              SizedBox(
+                height: 48,
+                width: double.infinity,
+                child: ListView.builder(
+                  itemCount: categories.length,
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 48,
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        margin: EdgeInsets.only(
+                          left: index == 0 ? 28 : 12,
+                          right: index == categories.length - 1 ? 28 : 0,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          gradient: const LinearGradient(
+                            colors: [kBlueAzure4A,kBlue],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.transparent,
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: BuildText(categories[index],
+                              MediaQuery.of(context).size.width, 16, kWhiteFA),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: kPadding28,
+              ),
+              SizedBox(
+                height: 176,
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: 2,
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: 176,
+                      width: 305,
+                      margin: EdgeInsets.only(
+                        left: index == 0 ? kPadding28 : kPadding20,
+                        right: index == 1 ? kPadding28 : 0,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(kBorderRadius26),
+                        image: const DecorationImage(
+                          image: AssetImage(
+                            'assets/images/bg-blue.jpg',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(kPadding24),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Sleep Meditation',
+                                style: kInterBold.copyWith(
+                                  color: kWhiteFF,
+                                  fontSize:
+                                      SizeConfig.blockSizeHorizontal! * 5.5,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: kPadding4,
+                              ),
+                              Text(
+                                '7 Day Audio and Video Series',
+                                style: kInterBold.copyWith(
+                                  color: kWhiteFF.withOpacity(0.6),
+                                  fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: kPadding28,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: kPadding28,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    BuildText("Recent added Events",
+                        MediaQuery.of(context).size.width, 16, kWhiteFF)
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: kPadding16,
+              ),
+              GridView.count(
+                shrinkWrap: true,
+                primary: false,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: kPadding28,
+                ),
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 16,
+                crossAxisCount: 2,
+                children: <Widget>[
+                  InkWell(
+                    onTap: (){
+                      Get.to(()=>MeditationDetailPage());
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(kBorderRadius26),
+                        image: const DecorationImage(
+                          image: AssetImage(
+                            'assets/images/bg-blue.jpg',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: kPadding16, vertical: kPadding24),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Sleep Meditation',
+                            style: kInterBold.copyWith(
+                              color: kWhiteFF,
+                              fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(kBorderRadius26),
+                      image: const DecorationImage(
+                        image: AssetImage(
+                          'assets/images/bg-blue.jpg',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: kPadding16, vertical: kPadding24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Sleep Meditation',
+                          style: kInterBold.copyWith(
+                            color: kWhiteFF,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                          ),
+                        ),
+                        SvgPicture.asset('assets/headphone-icon.svg'),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(kBorderRadius26),
+                      image: const DecorationImage(
+                        image: AssetImage(
+                          'assets/images/bg-blue.jpg',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: kPadding16, vertical: kPadding24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Sleep Meditation',
+                          style: kInterBold.copyWith(
+                            color: kWhiteFF,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(kBorderRadius26),
+                      image: const DecorationImage(
+                        image: AssetImage(
+                          "assets/images/bg-blue.jpg",
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: kPadding16, vertical: kPadding24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Sleep Meditation',
+                          style: kInterBold.copyWith(
+                            color: kWhiteFF,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(kBorderRadius26),
+                      image: const DecorationImage(
+                        image: AssetImage(
+                          'assets/images/bg-blue.jpg',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: kPadding16, vertical: kPadding24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Sleep Meditation',
+                          style: kInterBold.copyWith(
+                            color: kWhiteFF,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(kBorderRadius26),
+                      image: const DecorationImage(
+                        image: AssetImage(
+                          'assets/images/bg-blue.jpg',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: kPadding16, vertical: kPadding24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Sleep Meditation',
+                          style: kInterBold.copyWith(
+                            color: kWhiteFF,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(kBorderRadius26),
+                      image: const DecorationImage(
+                        image: AssetImage(
+                          'assets/images/bg-blue.jpg',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: kPadding16, vertical: kPadding24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Sleep Meditation',
+                          style: kInterBold.copyWith(
+                            color: kWhiteFF,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

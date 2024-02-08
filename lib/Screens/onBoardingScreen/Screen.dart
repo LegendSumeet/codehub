@@ -1,7 +1,9 @@
-
+import 'package:codehub/Screens/HomeScreen/HomePage.dart';
 import 'package:codehub/Screens/onBoardingScreen/content.dart';
 import 'package:codehub/widgets/SizeConfig.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -32,10 +34,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       decoration: const BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.all(
           Radius.circular(50),
         ),
-        color: Color(0xFF000000),
       ),
       margin: const EdgeInsets.only(right: 5),
       height: 10,
@@ -51,7 +53,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     double height = SizeConfig.screenH!;
 
     return Scaffold(
-      backgroundColor: colors[_currentPage],
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(
           children: [
@@ -78,6 +80,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           contents[i].title,
                           textAlign: TextAlign.center,
                           style: TextStyle(
+                            color: Colors.white,
                             fontFamily: "Mulish",
                             fontWeight: FontWeight.w600,
                             fontSize: (width <= 550) ? 30 : 35,
@@ -87,6 +90,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Text(
                           contents[i].desc,
                           style: TextStyle(
+                            color: Colors.white,
                             fontFamily: "Mulish",
                             fontWeight: FontWeight.w300,
                             fontSize: (width <= 550) ? 17 : 25,
@@ -117,10 +121,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ? Padding(
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text("START",style: TextStyle(color: Colors.white),),
+                            onPressed: () {
+                              Get.to(()=>HomePage());
+                            },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black,
+                              foregroundColor: Colors.black,
+                              backgroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50),
                               ),
@@ -131,6 +137,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       horizontal: width * 0.2, vertical: 25),
                               textStyle:
                                   TextStyle(fontSize: (width <= 550) ? 13 : 17),
+                            ),
+                            child: const Text(
+                              "START",
+                              style: TextStyle(color: Colors.black),
                             ),
                           ),
                         )
@@ -143,16 +153,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 onPressed: () {
                                   _controller.jumpToPage(2);
                                 },
-                                child: const Text(
-                                  "SKIP",
-                                  style: TextStyle(color: Colors.black),
-                                ),
                                 style: TextButton.styleFrom(
                                   elevation: 0,
                                   textStyle: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: (width <= 550) ? 13 : 17,
                                   ),
+                                ),
+                                child: const Text(
+                                  "SKIP",
+                                  style: TextStyle(color: Colors.white),
                                 ),
                               ),
                               ElevatedButton(
@@ -162,7 +172,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     curve: Curves.easeIn,
                                   );
                                 },
-                                child: const Text("NEXT",style: TextStyle(color: Colors.white)),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.black,
                                   shape: RoundedRectangleBorder(
@@ -177,6 +186,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   textStyle: TextStyle(
                                       fontSize: (width <= 550) ? 13 : 17),
                                 ),
+                                child: const Text("NEXT",
+                                    style: TextStyle(color: Colors.white)),
                               ),
                             ],
                           ),
