@@ -1,9 +1,8 @@
-import 'package:codehub/Screens/HomeScreen/HomePage.dart';
 import 'package:codehub/Screens/onBoardingScreen/content.dart';
+import 'package:codehub/widgets/NavBar/Bottom_Nav_bar.dart';
 import 'package:codehub/widgets/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -122,7 +121,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
                             onPressed: () {
-                              Get.to(()=>HomePage());
+                              Get.to(()=>const EntryPoint());
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.black,

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../../Contants/app_style.dart';
 import '../../widgets/SizeConfig.dart';
 import '../eventdetails/eventpage.dart';
@@ -16,7 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<String> categories = [
-    'Tech Bootcamps',
+    'Tech Bootcamp',
     'Hackathon',
     'Programs',
     'Conferences',
@@ -93,22 +91,18 @@ class _HomePageState extends State<HomePage> {
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          gradient: const LinearGradient(
-                            colors: [kBlueAzure4A,kBlue],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          boxShadow: [
+                          color: kWhiteF7,
+                          boxShadow: const [
                             BoxShadow(
                               color: Colors.transparent,
                               blurRadius: 8,
-                              offset: const Offset(0, 4),
+                              offset: Offset(0, 4),
                             ),
                           ],
                         ),
                         child: Center(
                           child: BuildText(categories[index],
-                              MediaQuery.of(context).size.width, 16, kWhiteFA),
+                              MediaQuery.of(context).size.width, 16, kBlack0D),
                         ),
                       ),
                     );
@@ -118,8 +112,23 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: kPadding28,
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: kPadding28,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    BuildText("Ongoing Events", MediaQuery.of(context).size.width,
+                        16, kWhiteFF)
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: kPadding16,
+              ),
               SizedBox(
-                height: 176,
+                height: 180,
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   itemCount: 2,
@@ -136,6 +145,7 @@ class _HomePageState extends State<HomePage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(kBorderRadius26),
                         image: const DecorationImage(
+                          colorFilter: ColorFilter.srgbToLinearGamma(),
                           image: AssetImage(
                             'assets/images/bg-blue.jpg',
                           ),
@@ -205,8 +215,8 @@ class _HomePageState extends State<HomePage> {
                 crossAxisCount: 2,
                 children: <Widget>[
                   InkWell(
-                    onTap: (){
-                      Get.to(()=>MeditationDetailPage());
+                    onTap: () {
+                      Get.to(() => const EventDetailPage());
                     },
                     child: Container(
                       decoration: BoxDecoration(

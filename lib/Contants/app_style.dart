@@ -18,10 +18,6 @@ Widget BuildText(
     ),
   );
 }
-
-
-
-/* Start of Color Constants */
 const Color kBlackRich12 = Color(0xff121421);
 const Color kBlackRichLight1C = Color(0xff1C2031);
 const Color kBlueAzure4A = Color.fromRGBO(74, 128, 240, 1);
