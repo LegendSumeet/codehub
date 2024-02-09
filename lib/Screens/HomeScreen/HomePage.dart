@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -9,7 +8,6 @@ import '../eventdetails/eventpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -21,13 +19,11 @@ class _HomePageState extends State<HomePage> {
     'Programs',
     'Conferences',
   ];
-  static const IconData hamburgerIconData =
-      IconData(0xe5d2, fontFamily: 'MaterialIcons');
   final List<IconData> categoryIcons = [
-    Icons.computer, // For Tech Bootcamp
-    Icons.lightbulb_outline, // For Hackathon
-    Icons.code, // For Programs
-    Icons.event, // For Conferences
+    CupertinoIcons.desktopcomputer,
+    CupertinoIcons.lightbulb_fill,
+    CupertinoIcons.arrow_swap,
+    CupertinoIcons.mic_solid,
   ];
   String _searchText = "";
   @override
@@ -374,7 +370,6 @@ class _HomePageState extends State<HomePage> {
                             fontSize: SizeConfig.blockSizeHorizontal! * 5,
                           ),
                         ),
-                        SvgPicture.asset('assets/headphone-icon.svg'),
                       ],
                     ),
                   ),
