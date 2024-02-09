@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -19,6 +21,15 @@ class _HomePageState extends State<HomePage> {
     'Programs',
     'Conferences',
   ];
+  static const IconData hamburgerIconData =
+      IconData(0xe5d2, fontFamily: 'MaterialIcons');
+  final List<IconData> categoryIcons = [
+    Icons.computer, // For Tech Bootcamp
+    Icons.lightbulb_outline, // For Hackathon
+    Icons.code, // For Programs
+    Icons.event, // For Conferences
+  ];
+  String _searchText = "";
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -43,11 +54,11 @@ class _HomePageState extends State<HomePage> {
                     GestureDetector(
                       onTap: () => debugPrint('Search Tapped!'),
                       child: const Icon(
-                        Icons.search_sharp,
+                        Icons.notifications,
                         color: Colors.white,
                         size: 28,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -72,45 +83,85 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: kPadding16,
               ),
-              SizedBox(
-                height: 48,
-                width: double.infinity,
-                child: ListView.builder(
-                  itemCount: categories.length,
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {},
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: kPadding28),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
                       child: Container(
                         height: 48,
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        margin: EdgeInsets.only(
-                          left: index == 0 ? 28 : 12,
-                          right: index == categories.length - 1 ? 28 : 0,
-                        ),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: kWhiteF7,
-                          boxShadow: const [
+                          borderRadius: BorderRadius.circular(10),
+                          color: kWhiteFF,
+                          boxShadow: [
                             BoxShadow(
-                              color: Colors.transparent,
-                              blurRadius: 8,
-                              offset: Offset(0, 4),
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 3,
+                              offset: const Offset(
+                                  0, 2), // changes position of shadow
                             ),
                           ],
                         ),
-                        child: Center(
-                          child: BuildText(categories[index],
-                              MediaQuery.of(context).size.width, 16, kBlack0D),
+                        child: TextField(
+                          style: const TextStyle(
+                              color:
+                                  Colors.black), // Changed text color to black
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            contentPadding: const EdgeInsets.all(12),
+                            prefixIcon: const Icon(Icons.search_sharp),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
+                            ),
+                            hintStyle: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey.shade500,
+                            ),
+                            hintText: "Search Events",
+                            suffixIcon: _searchText.isNotEmpty
+                                ? IconButton(
+                                    icon: const Icon(Icons.clear),
+                                    color: Colors.grey.shade500,
+                                    onPressed: () =>
+                                        setState(() => _searchText = ""),
+                                  )
+                                : null,
+                          ),
+                          onChanged: (text) =>
+                              setState(() => _searchText = text),
                         ),
                       ),
-                    );
-                  },
+                    ),
+                    const SizedBox(
+                      width: kPadding28,
+                    ), // Added SizedBox to create space between the text field and the button
+                    GestureDetector(
+                      onTap: () {
+                        // Action on settings icon tap
+                      },
+                      child: Container(
+                        width: 48,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(
+                          CupertinoIcons.slider_horizontal_3,
+                          size: 30,
+                          color: kBlack0D,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
               const SizedBox(
-                height: kPadding28,
+                height: kPadding16,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -119,8 +170,8 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    BuildText("Ongoing Events", MediaQuery.of(context).size.width,
-                        16, kWhiteFF)
+                    BuildText("Ongoing Events",
+                        MediaQuery.of(context).size.width, 16, kWhiteFF)
                   ],
                 ),
               ),
@@ -181,6 +232,61 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: kPadding28,
+              ),
+              SizedBox(
+                height: 60,
+                width: double.infinity,
+                child: ListView.builder(
+                  itemCount: categories.length,
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 48,
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        margin: EdgeInsets.only(
+                          left: index == 0 ? 28 : 12,
+                          right: index == categories.length - 1 ? 28 : 0,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: kWhiteF7,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.transparent,
+                              blurRadius: 8,
+                              offset: Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                categoryIcons[
+                                    index], // Use the icon corresponding to the index
+                                size: 24, // Adjust icon size as needed
+                              ),
+                              const SizedBox(
+                                  height:
+                                      4), // Add spacing between icon and text
+                              Text(
+                                categories[index],
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     );
                   },

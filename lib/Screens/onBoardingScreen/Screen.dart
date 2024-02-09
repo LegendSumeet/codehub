@@ -50,7 +50,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     SizeConfig().init(context);
     double width = SizeConfig.screenW!;
     double height = SizeConfig.screenH!;
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -65,12 +64,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 itemCount: contents.length,
                 itemBuilder: (context, i) {
                   return Padding(
-                    padding: const EdgeInsets.all(40.0),
+                    padding:
+                        EdgeInsets.all(SizeConfig.blockSizeHorizontal! * 5),
                     child: Column(
                       children: [
                         Image.asset(
                           contents[i].image,
-                          height: SizeConfig.blockV! * 35,
+                          height: SizeConfig.blockSizeVertical! * 35,
                         ),
                         SizedBox(
                           height: (height >= 840) ? 60 : 30,
@@ -82,7 +82,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             color: Colors.white,
                             fontFamily: "Mulish",
                             fontWeight: FontWeight.w600,
-                            fontSize: (width <= 550) ? 30 : 35,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 8,
                           ),
                         ),
                         const SizedBox(height: 15),
@@ -92,7 +92,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             color: Colors.white,
                             fontFamily: "Mulish",
                             fontWeight: FontWeight.w300,
-                            fontSize: (width <= 550) ? 17 : 25,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 4.5,
                           ),
                           textAlign: TextAlign.center,
                         )
@@ -118,10 +118,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   _currentPage + 1 == contents.length
                       ? Padding(
-                          padding: const EdgeInsets.all(30),
+                          padding: EdgeInsets.all(
+                              SizeConfig.blockSizeHorizontal! * 7.5),
                           child: ElevatedButton(
                             onPressed: () {
-                              Get.to(()=>const EntryPoint());
+                              Get.to(() => const EntryPoint());
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.black,
@@ -129,13 +130,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50),
                               ),
-                              padding: (width <= 550)
-                                  ? const EdgeInsets.symmetric(
-                                      horizontal: 100, vertical: 20)
-                                  : EdgeInsets.symmetric(
-                                      horizontal: width * 0.2, vertical: 25),
-                              textStyle:
-                                  TextStyle(fontSize: (width <= 550) ? 13 : 17),
+                              padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    SizeConfig.blockSizeHorizontal! * 12,
+                                vertical: SizeConfig.blockSizeHorizontal! * 3,
+                              ),
+                              textStyle: TextStyle(
+                                  fontSize:
+                                      SizeConfig.blockSizeHorizontal! * 5),
                             ),
                             child: const Text(
                               "START",
@@ -144,7 +146,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         )
                       : Padding(
-                          padding: const EdgeInsets.all(30),
+                          padding: EdgeInsets.all(
+                              SizeConfig.blockSizeHorizontal! * 7.5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -156,7 +159,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   elevation: 0,
                                   textStyle: TextStyle(
                                     fontWeight: FontWeight.w600,
-                                    fontSize: (width <= 550) ? 13 : 17,
+                                    fontSize:
+                                        SizeConfig.blockSizeHorizontal! * 5,
                                   ),
                                 ),
                                 child: const Text(
@@ -177,13 +181,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     borderRadius: BorderRadius.circular(50),
                                   ),
                                   elevation: 0,
-                                  padding: (width <= 550)
-                                      ? const EdgeInsets.symmetric(
-                                          horizontal: 30, vertical: 20)
-                                      : const EdgeInsets.symmetric(
-                                          horizontal: 30, vertical: 25),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        SizeConfig.blockSizeHorizontal! * 3,
+                                    vertical:
+                                        SizeConfig.blockSizeHorizontal! * 3,
+                                  ),
                                   textStyle: TextStyle(
-                                      fontSize: (width <= 550) ? 13 : 17),
+                                    fontSize:
+                                        SizeConfig.blockSizeHorizontal! * 5,
+                                  ),
                                 ),
                                 child: const Text("NEXT",
                                     style: TextStyle(color: Colors.white)),
