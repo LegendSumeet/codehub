@@ -1,8 +1,11 @@
+import 'package:codehub/controllers/GetBootcamps/bloc/bootcamps_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../Contants/app_style.dart';
 import '../../widgets/SizeConfig.dart';
+import '../ListScreen/bootcamp/bootcampscreenlist.dart';
+import '../TechBootcampsScreen/Screen.dart';
 import '../eventdetails/eventpage.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,6 +15,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final BootcampsBloc bootcampbloc = BootcampsBloc();
+  @override
+  void initState() {
+    bootcampbloc.add(BootCampInitialFetchEvent());
+    super.initState();
+  }
+
   List<String> categories = [
     'Tech Bootcamp',
     'Hackathon',
@@ -346,30 +356,35 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(kBorderRadius26),
-                      image: const DecorationImage(
-                        image: AssetImage(
-                          'assets/images/bg-blue.jpg',
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: kPadding16, vertical: kPadding24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Sleep Meditation',
-                          style: kInterBold.copyWith(
-                            color: kWhiteFF,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                  InkWell(
+                    onTap: () {
+                      Get.to(() => const BootcampsList());
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(kBorderRadius26),
+                        image: const DecorationImage(
+                          image: AssetImage(
+                            'assets/images/bg-blue.jpg',
                           ),
+                          fit: BoxFit.cover,
                         ),
-                      ],
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: kPadding16, vertical: kPadding24),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Sleep Meditation',
+                            style: kInterBold.copyWith(
+                              color: kWhiteFF,
+                              fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Container(

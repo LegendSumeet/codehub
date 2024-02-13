@@ -162,3 +162,8 @@ final kRalewayRegular = GoogleFonts.raleway(
 );
 
 /* End of Font */
+
+
+class appinfo {
+  static String servertoken = "qwewrtyuioplkfgfjifgodoigpidfjgp";
+}
