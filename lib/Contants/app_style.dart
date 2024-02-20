@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Widget BuildText(
   String title,
@@ -18,6 +19,7 @@ Widget BuildText(
     ),
   );
 }
+
 const Color kBlackRich12 = Color(0xff121421);
 const Color kBlackRichLight1C = Color(0xff1C2031);
 const Color kBlueAzure4A = Color.fromRGBO(74, 128, 240, 1);
@@ -58,12 +60,6 @@ const double kPadding22 = 22.0;
 const double kPadding24 = 24.0;
 const double kPadding28 = 28.0;
 const double kPadding32 = 32.0;
-
-/* End of Color Constants */
-
-// =========================== //
-
-/* Start of Gradient Style */
 
 Gradient kLinearGradientBlack = LinearGradient(
   begin: Alignment.bottomCenter,
@@ -124,7 +120,6 @@ const double kBorderRadius5 = 5.0;
 
 /* Start of Padding */
 
-
 /* End of Padding */
 
 // =========================== //
@@ -144,7 +139,6 @@ final kInputBorder = OutlineInputBorder(
 
 /* Start of Font */
 
-
 final kRalewayBold = GoogleFonts.raleway(
   fontWeight: FontWeight.w700,
 );
@@ -163,7 +157,12 @@ final kRalewayRegular = GoogleFonts.raleway(
 
 /* End of Font */
 
-
 class appinfo {
   static String servertoken = "qwewrtyuioplkfgfjifgodoigpidfjgp";
+  static Future<void> openExternalApplication(String url) async {
+    if (!await launchUrl(Uri.parse(url),
+        mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
+  }
 }

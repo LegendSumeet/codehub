@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "991275482419",
+    "project_id": "codehub-app",
+    "storage_bucket": "codehub-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991275482419:android:c75ce92c45e2aa26f5d246",
+        "android_client_info": {
+          "package_name": "com.bluespace.codehub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs_Fnaj4VetAa6zmuLzOF-Uz3cY4OUisg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

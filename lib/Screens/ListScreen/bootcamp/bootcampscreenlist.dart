@@ -91,14 +91,9 @@ class _BootcampsListState extends State<BootcampsList> {
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.9,
                       decoration: BoxDecoration(
+                        border: Border.all(color: kWhite),
+                        color: kBlackRichLight1C,
                         borderRadius: BorderRadius.circular(28),
-                        image: const DecorationImage(
-                          colorFilter: ColorFilter.srgbToLinearGamma(),
-                          image: AssetImage(
-                            'assets/images/bg-blue.jpg',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
                       ),
                       padding: const EdgeInsets.all(12),
                       child: Column(
@@ -202,7 +197,9 @@ class _BootcampsListState extends State<BootcampsList> {
                                 hoverColor: kWhiteF7,
                                 onTap: () {
                                   Get.to(
-                                    () => TechBootcampPage(),
+                                    () => TechBootcampPage(
+                                      reqid: successState.bootcamps[index].id,
+                                    ),
                                   );
                                 },
                                 child: Padding(

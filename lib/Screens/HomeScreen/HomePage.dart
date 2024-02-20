@@ -1,3 +1,4 @@
+import 'package:codehub/controllers/GetBootcamps/Getbootcampsbyid/bloc/bootcampsbyid_bloc.dart';
 import 'package:codehub/controllers/GetBootcamps/bloc/bootcamps_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +16,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final BootcampsBloc bootcampbloc = BootcampsBloc();
+  final BootcampsbyidBloc bootcampbloc = BootcampsbyidBloc();
   @override
   void initState() {
-    bootcampbloc.add(BootCampInitialFetchEvent());
+    bootcampbloc
+        .add(BootCampInitialFetchEventbyid(id: "65ca42e6296e5984814d32ad"));
     super.initState();
   }
 
@@ -155,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           CupertinoIcons.slider_horizontal_3,
                           size: 30,
                           color: kBlack0D,
@@ -264,7 +266,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          color: kWhiteF7,
+                          border: Border.all(color: kWhiteF7),
+                          color: kBlack0D,
                           boxShadow: const [
                             BoxShadow(
                               color: Colors.transparent,
@@ -278,16 +281,15 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
-                                categoryIcons[
-                                    index], // Use the icon corresponding to the index
-                                size: 24, // Adjust icon size as needed
+                                categoryIcons[index],
+                                size: 24,
+                                color: kWhiteF7,
                               ),
-                              const SizedBox(
-                                  height:
-                                      4), // Add spacing between icon and text
+                              const SizedBox(height: 4),
                               Text(
                                 categories[index],
-                                style: const TextStyle(fontSize: 16),
+                                style: const TextStyle(
+                                    fontSize: 16, color: kWhiteF7),
                               ),
                             ],
                           ),

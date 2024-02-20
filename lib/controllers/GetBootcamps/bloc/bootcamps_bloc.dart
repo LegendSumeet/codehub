@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../repos/bootcamps_repo.dart';
+import '../repos/bootcampsby_repo.dart';
 
 part 'bootcamp_event.dart';
 part 'bootcamp_state.dart';
