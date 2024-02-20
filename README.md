@@ -39,5 +39,3 @@ If you're interested in contributing to CodeHub, check out our [Contribution Gui
 ## License:
 
 This project is licensed under the [MIT License](LICENSE).
-
-postgresql://LegendSumeet:qoH9ECk2lvrX@ep-steep-truth-a5297ohd.us-east-2.aws.neon.tech/CodehubDB?sslmode=require
