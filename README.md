@@ -1,5 +1,6 @@
 
-![Screenshot 2024-02-21 000327](https://github.com/LegendSumeet/codehub/assets/85386116/d000bdcf-a500-4741-ad60-b287cb34a770)
+![image](https://github.com/LegendSumeet/codehub/assets/85386116/93ce6fbf-1363-4976-b763-1d5d975f758c)
+
 
 # CodeHub - Your Tech Events Companion
 
