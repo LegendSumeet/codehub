@@ -21,7 +21,6 @@ class BootcampsByid {
   final String duration;
   final String organizer;
   final String category;
-  final int teamsize;
   final List<String> tags;
   final String contactEmail;
   final DateTime createdAt;
@@ -40,7 +39,6 @@ class BootcampsByid {
     required this.duration,
     required this.organizer,
     required this.category,
-    required this.teamsize,
     required this.tags,
     required this.contactEmail,
     required this.createdAt,
@@ -60,7 +58,6 @@ class BootcampsByid {
     duration: json["duration"],
     organizer: json["organizer"],
     category: json["category"],
-    teamsize: json["teamsize"],
     tags: List<String>.from(json["tags"].map((x) => x)),
     contactEmail: json["contactEmail"],
     createdAt: DateTime.parse(json["createdAt"]),
@@ -80,7 +77,6 @@ class BootcampsByid {
     "duration": duration,
     "organizer": organizer,
     "category": category,
-    "teamsize": teamsize,
     "tags": List<dynamic>.from(tags.map((x) => x)),
     "contactEmail": contactEmail,
     "createdAt": createdAt.toIso8601String(),

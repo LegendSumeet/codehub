@@ -17,12 +17,6 @@ List<OnboardingContents> contents = [
     desc: "Explore and stay updated on upcoming tech events in your industry.",
   ),
   OnboardingContents(
-    title: "Connect with Tech Enthusiasts",
-    image: "assets/images/image2.png",
-    desc:
-    "Connect with like-minded professionals and enthusiasts to share insights.",
-  ),
-  OnboardingContents(
     title: "Receive Real-time Event Notifications",
     image: "assets/images/image3.png",
     desc:

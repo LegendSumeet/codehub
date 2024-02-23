@@ -12,7 +12,20 @@
           "package_name": "com.bluespace.codehub"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "991275482419-hr7r40ta2gq791fdd7kfn08gbhruirp6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bluespace.codehub",
+            "certificate_hash": "10304342c591ac413e9a3e66c28ca7df3ea880bc"
+          }
+        },
+        {
+          "client_id": "991275482419-hgpp86gu76si2gtmef2us3a48m9b2cn9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBs_Fnaj4VetAa6zmuLzOF-Uz3cY4OUisg"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991275482419-hgpp86gu76si2gtmef2us3a48m9b2cn9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "991275482419-j9pgua45f1a3ubq3b98cebkg41lgilkt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bluespace.codehub.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }

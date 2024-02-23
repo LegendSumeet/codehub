@@ -27,8 +27,8 @@ class _EntryPointState extends State<EntryPoint>
       vsync: this,
       duration: const Duration(milliseconds: 200),
     )..addListener(() {
-      setState(() {});
-    });
+        setState(() {});
+      });
     scalAnimation = Tween<double>(
       begin: 1,
       end: 0.8,
@@ -103,8 +103,8 @@ class _EntryPointState extends State<EntryPoint>
         decoration: BoxDecoration(
           border: _currentIndex == index
               ? const Border(
-            top: BorderSide(color: Colors.white, width: 2),
-          )
+                  top: BorderSide(color: Colors.white, width: 2),
+                )
               : null,
         ),
         child: Icon(

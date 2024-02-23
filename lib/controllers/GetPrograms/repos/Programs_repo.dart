@@ -2,12 +2,13 @@ import 'package:codehub/models/BootcampsModel/bootcamp_ui_model.dart';
 import 'package:codehub/Contants/app_style.dart';
 import 'package:http/http.dart' as http;
 
-import '../bloc/bootcamps_bloc.dart';
+import '../../../models/openrepomodel/openrepo_ui_model.dart';
+import '../bloc/open_source_programs_bloc.dart';
 
 var client = http.Client();
 
-class BootcampsRepo {
-  static Future<List<BootcampModel>> fetchBootcamps() async {
+class GetProgramsRepo {
+  static Future<List<OpenRepo>> fetchPrograms() async {
     try {
       Map<String, String> requestHeaders = {
         'Content-type': 'application/json',
@@ -15,20 +16,16 @@ class BootcampsRepo {
         'authorization': appinfo.servertoken
       };
       var response = await http.get(
-        Uri.parse("https://apicodehub.vercel.app/api/bootcamps/getallbootcamp"),
+        Uri.parse("https://apicodehub.vercel.app/api/openrepo/getallrepo"),
         headers: requestHeaders,
       );
       if (response.statusCode == 200) {
-        List<BootcampModel> bootcampsdata =
-            bootcampModelFromJson(response.body);
-        print("object");
+        List<OpenRepo> bootcampsdata = openRepoFromJson(response.body);
         return bootcampsdata;
       } else {
-        print("object");
         return [];
       }
     } catch (e) {
-      print(e);
       return [];
     }
   }

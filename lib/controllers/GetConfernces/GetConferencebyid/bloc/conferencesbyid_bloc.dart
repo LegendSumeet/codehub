@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import '../repos/Conferencebyid_repo.dart';
-import '../repos/conferencebyid_repo.dart';
 
 part 'conferencebyid_event.dart';
 part 'conferencebyid_state.dart';
@@ -22,7 +21,7 @@ class ConferencesByIdBloc extends Bloc<PostConferences, ConferenceState> {
     emit(ConferenceFetchingLoadingState());
     try {
       ConferenceBYid conferenceData =
-          await ConferenceByIdRepos.fetchConferencesbyid(id);
+          await GetConferenceByIdRepos.fetchConferencesbyid(id);
       emit(ConferenceFetchingSuccessfulState(conference: conferenceData));
     } catch (error) {
       emit(ConferenceFetchingErrorState());

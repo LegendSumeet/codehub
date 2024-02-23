@@ -2,12 +2,10 @@ import 'package:codehub/controllers/GetBootcamps/Getbootcampsbyid/bloc/bootcamps
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../Contants/app_style.dart';
 import '../../widgets/SizeConfig.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TechBootcampPage extends StatefulWidget {
   final String reqid;
@@ -102,6 +100,15 @@ class _TechBootcampPageState extends State<TechBootcampPage> {
               case BootCampsbyidFetchingSuccessfulState:
                 final successState =
                     state as BootCampsbyidFetchingSuccessfulState;
+
+                DateTime startDate = successState.bootcamps.startDate;
+                DateTime endDate = successState.bootcamps.endDate;
+
+                String formattedStartDate =
+                    "${startDate.day}-${startDate.month}-${startDate.year}";
+                String formattedEndDate =
+                    "${endDate.day}-${endDate.month}-${endDate.year}";
+
                 return SafeArea(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -290,27 +297,7 @@ class _TechBootcampPageState extends State<TechBootcampPage> {
                         const SizedBox(
                           height: kPadding16,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: kPadding28,
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(CupertinoIcons.person_3_fill,
-                                  color: kWhiteF7),
-                              Text(
-                                "Team Size : ${successState.bootcamps.teamsize} ",
-                                style: TextStyle(
-                                  fontFamily: "Mulish",
-                                  color: kWhiteF7,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.04,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+
                         const SizedBox(
                           height: kPadding16,
                         ),
@@ -336,7 +323,7 @@ class _TechBootcampPageState extends State<TechBootcampPage> {
                                     Column(
                                       children: [
                                         Text(
-                                          "Start Date: ${successState.bootcamps.startDate}",
+                                          "Start Date: ${formattedStartDate}",
                                           style: TextStyle(
                                             fontFamily: "Mulish",
                                             color: kWhiteF7,
@@ -348,7 +335,7 @@ class _TechBootcampPageState extends State<TechBootcampPage> {
                                           ),
                                         ),
                                         Text(
-                                          "End Date: ${successState.bootcamps.endDate}",
+                                          "End Date: ${formattedEndDate}",
                                           style: TextStyle(
                                             fontFamily: "Mulish",
                                             color: kWhiteF7,
@@ -428,42 +415,7 @@ class _TechBootcampPageState extends State<TechBootcampPage> {
                         const SizedBox(
                           height: kPadding16,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: kPadding28,
-                          ),
-                          child: Text(
-                            "Meditation is a practice where an individual uses a technique – such as mindfulness, or focusing their mind on a particular object, thought or activity – to train attention ",
-                            style: TextStyle(
-                              fontFamily: "Mulish",
-                              color: Colors.white.withOpacity(0.6),
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.04,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: kPadding16,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: kPadding28,
-                          ),
-                          child: Text(
-                            "Meditation is a practice where an individual uses a technique – such as mindfulness, or focusing their mind on a particular object, thought or activity – to train attention ",
-                            style: TextStyle(
-                              fontFamily: "Mulish",
-                              color: Colors.white.withOpacity(0.6),
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.04,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: kPadding16,
-                        ),
+
                         Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: kPadding28,

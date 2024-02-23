@@ -10,7 +10,8 @@ Widget BuildText(
 ) {
   return Text(
     title,
-    textAlign: TextAlign.center,
+    textAlign: TextAlign.start
+    ,
     style: TextStyle(
       color: textColor,
       fontFamily: "Mulish",
@@ -61,15 +62,16 @@ const double kPadding24 = 24.0;
 const double kPadding28 = 28.0;
 const double kPadding32 = 32.0;
 
-Gradient kLinearGradientBlack = LinearGradient(
+Gradient kLinearGradientDarkBlue = LinearGradient(
   begin: Alignment.bottomCenter,
   end: Alignment.topCenter,
   colors: <Color>[
-    kBlack.withOpacity(0.8),
-    kBlack0D.withOpacity(0),
+    Colors.blue.shade800.withOpacity(0.8), // Dark blue color
+    Colors.blue.shade400.withOpacity(0),   // Transparent blue
   ],
   tileMode: TileMode.clamp,
 );
+
 
 const Gradient kLinearGradientBlue = LinearGradient(
   begin: Alignment.topCenter,

@@ -7,7 +7,7 @@ import '../bloc/conferencesbyid_bloc.dart';
 
 var client = http.Client();
 
-class ConferenceByIdRepos {
+class GetConferenceByIdRepos {
   static Future<ConferenceBYid> fetchConferencesbyid(String id) async {
     try {
       Map<String, String> requestHeaders = {

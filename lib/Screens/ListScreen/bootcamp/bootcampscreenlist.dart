@@ -91,139 +91,102 @@ class _BootcampsListState extends State<BootcampsList> {
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.9,
                       decoration: BoxDecoration(
-                        border: Border.all(color: kWhite),
-                        color: kBlackRichLight1C,
-                        borderRadius: BorderRadius.circular(28),
+                        border: Border.all(color: kGrey8E),
+                        color: kBlackRich12,
+                        borderRadius: BorderRadius.circular(18),
                       ),
                       padding: const EdgeInsets.all(12),
-                      child: Column(
+                      child: Row(
+                        // Wrap Column with Row
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              BuildText(
-                                  successState.bootcamps[index].name,
-                                  MediaQuery.of(context).size.width,
-                                  MediaQuery.of(context).size.width * 0.05,
-                                  kWhiteFF),
-                              const SizedBox(
-                                height: 4,
+                          // Image Widget
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            height: MediaQuery.of(context).size.width * 0.4,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(successState
+                                    .bootcamps[index]
+                                    .imageUrl), // Provide the URL of the image
+                                fit: BoxFit.cover,
                               ),
-                              Text(
-                                successState.bootcamps[index].description,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontFamily: "Mulish",
-                                  color: Colors.white.withOpacity(0.6),
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.04,
-                                  fontWeight: FontWeight.bold,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          const SizedBox(
+                              width:
+                                  12), // Add some spacing between image and text
+                          // Column for text content
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    BuildText(
+                                      successState.bootcamps[index].name,
+                                      MediaQuery.of(context).size.width,
+                                      MediaQuery.of(context).size.width * 0.05,
+                                      kWhiteFF,
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      successState.bootcamps[index].description,
+                                      maxLines: 5,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontFamily: "Mulish",
+                                        color: Colors.white.withOpacity(0.6),
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              const SizedBox(
-                                height: kPadding18,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.location_on_rounded,
-                                        color: kWhite,
+                                const SizedBox(height: kPadding18),
+                                const Divider(
+                                  height: 1,
+                                  color: kGrey8E,
+                                ),
+                                InkWell(
+                                  hoverColor: kWhiteF7,
+                                  onTap: () {
+                                    Get.to(
+                                      () => TechBootcampPage(
+                                        reqid: successState.bootcamps[index].id,
                                       ),
-                                      const SizedBox(
-                                        width: kPadding8,
-                                      ),
-                                      Text(
-                                        successState.bootcamps[index].location
-                                            .toString(),
-                                        style: TextStyle(
-                                          fontFamily: "Mulish",
-                                          color: Colors.white.withOpacity(0.6),
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.04,
-                                          fontWeight: FontWeight.bold,
+                                    );
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "View More",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.04,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    "Team Size - ${successState.bootcamps[index].teamsize.toString()}",
-                                    style: TextStyle(
-                                      fontFamily: "Mulish",
-                                      color: Colors.white.withOpacity(0.6),
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.04,
-                                      fontWeight: FontWeight.bold,
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Theme - ${successState.bootcamps[index].category.toString()}",
-                                    style: TextStyle(
-                                      fontFamily: "Mulish",
-                                      color: Colors.white.withOpacity(0.6),
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.04,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: kPadding18,
-                              ),
-                              const Divider(
-                                height: 1,
-                                color: kWhite,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              InkWell(
-                                hoverColor: kWhiteF7,
-                                onTap: () {
-                                  Get.to(
-                                    () => TechBootcampPage(
-                                      reqid: successState.bootcamps[index].id,
-                                    ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "View More",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.04,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -265,7 +228,7 @@ Widget buildStatusContainer(
           width: 4,
         ),
         Text(text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
             )),
       ],

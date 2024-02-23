@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:codehub/Screens/ListScreen/hackathon/hackathonscreenlist.dart';
 import 'package:codehub/controllers/GetBootcamps/Getbootcampsbyid/bloc/bootcampsbyid_bloc.dart';
 import 'package:codehub/controllers/GetBootcamps/bloc/bootcamps_bloc.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,27 +19,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final BootcampsbyidBloc bootcampbloc = BootcampsbyidBloc();
   @override
   void initState() {
-    bootcampbloc
-        .add(BootCampInitialFetchEventbyid(id: "65ca42e6296e5984814d32ad"));
     super.initState();
   }
 
-  List<String> categories = [
-    'Tech Bootcamp',
-    'Hackathon',
-    'Programs',
-    'Conferences',
-  ];
-  final List<IconData> categoryIcons = [
-    CupertinoIcons.desktopcomputer,
-    CupertinoIcons.lightbulb_fill,
-    CupertinoIcons.arrow_swap,
-    CupertinoIcons.mic_solid,
-  ];
-  String _searchText = "";
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -48,6 +35,9 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: kPadding16,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: kPadding28,
@@ -90,83 +80,6 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: kPadding16,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: kPadding28),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 48,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: kWhiteFF,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 1,
-                              blurRadius: 3,
-                              offset: const Offset(
-                                  0, 2), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: TextField(
-                          style: const TextStyle(
-                              color:
-                                  Colors.black), // Changed text color to black
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            contentPadding: const EdgeInsets.all(12),
-                            prefixIcon: const Icon(Icons.search_sharp),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none,
-                            ),
-                            hintStyle: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey.shade500,
-                            ),
-                            hintText: "Search Events",
-                            suffixIcon: _searchText.isNotEmpty
-                                ? IconButton(
-                                    icon: const Icon(Icons.clear),
-                                    color: Colors.grey.shade500,
-                                    onPressed: () =>
-                                        setState(() => _searchText = ""),
-                                  )
-                                : null,
-                          ),
-                          onChanged: (text) =>
-                              setState(() => _searchText = text),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: kPadding28,
-                    ), // Added SizedBox to create space between the text field and the button
-                    GestureDetector(
-                      onTap: () {
-                        // Action on settings icon tap
-                      },
-                      child: Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Icon(
-                          CupertinoIcons.slider_horizontal_3,
-                          size: 30,
-                          color: kBlack0D,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
               const SizedBox(
                 height: kPadding16,
               ),
@@ -186,110 +99,65 @@ class _HomePageState extends State<HomePage> {
                 height: kPadding16,
               ),
               SizedBox(
-                height: 180,
+                height: 250,
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   itemCount: 2,
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: 176,
-                      width: 305,
-                      margin: EdgeInsets.only(
-                        left: index == 0 ? kPadding28 : kPadding20,
-                        right: index == 1 ? kPadding28 : 0,
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: kPadding18,
                       ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(kBorderRadius26),
-                        image: const DecorationImage(
-                          colorFilter: ColorFilter.srgbToLinearGamma(),
-                          image: AssetImage(
-                            'assets/images/bg-blue.jpg',
+                      child: InkWell(
+                        onTap: () {
+                          Get.to(() => const HackathonList(),
+                            curve: Curves.easeInOutSine,
+                            transition: Transition.rightToLeftWithFade,
+                            duration: Duration(milliseconds: 500),
+                          );
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.81,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: kGrey85, width: 1),
+                            borderRadius:
+                                BorderRadius.circular(kBorderRadius26),
+                            image: const DecorationImage(
+                              colorFilter: ColorFilter.srgbToLinearGamma(),
+                              filterQuality: FilterQuality.high,
+                              image: AssetImage("assets/images/liveh.jpg"),
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      padding: const EdgeInsets.all(kPadding24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: kPadding16, vertical: kPadding24),
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Sleep Meditation',
+                                'Hackathons',
                                 style: kInterBold.copyWith(
                                   color: kWhiteFF,
-                                  fontSize:
-                                      SizeConfig.blockSizeHorizontal! * 5.5,
+                                  fontSize: SizeConfig.blockSizeHorizontal! * 5,
                                 ),
                               ),
-                              const SizedBox(
-                                height: kPadding4,
-                              ),
-                              Text(
-                                '7 Day Audio and Video Series',
-                                style: kInterBold.copyWith(
-                                  color: kWhiteFF.withOpacity(0.6),
-                                  fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(
-                height: kPadding28,
-              ),
-              SizedBox(
-                height: 60,
-                width: double.infinity,
-                child: ListView.builder(
-                  itemCount: categories.length,
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: 48,
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        margin: EdgeInsets.only(
-                          left: index == 0 ? 28 : 12,
-                          right: index == categories.length - 1 ? 28 : 0,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: kWhiteF7),
-                          color: kBlack0D,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.transparent,
-                              blurRadius: 8,
-                              offset: Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                categoryIcons[index],
-                                size: 24,
-                                color: kWhiteF7,
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                categories[index],
-                                style: const TextStyle(
-                                    fontSize: 16, color: kWhiteF7),
+                              const BlinkingWidget(
+                                children: [
+                                  Text(
+                                    'LIVE',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      width:
+                                          16.0), // Adjust spacing if necessary
+                                ],
                               ),
                             ],
                           ),
@@ -306,220 +174,224 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.symmetric(
                   horizontal: kPadding28,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BuildText("Recent added Events",
-                        MediaQuery.of(context).size.width, 16, kWhiteFF)
+                    BuildText("Pick The Right Opportunity!",
+                        MediaQuery.of(context).size.width, 16, kWhiteFF),
+                    const SizedBox(
+                      height: kPadding4,
+                    ),
+                    Text(
+                      'Explore opportunities that best suits your skills and interests!',
+                      style: kInterBold.copyWith(
+                        color: kWhiteFF.withOpacity(0.6),
+                        fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                      ),
+                    ),
                   ],
                 ),
               ),
               const SizedBox(
                 height: kPadding16,
               ),
-              GridView.count(
-                shrinkWrap: true,
-                primary: false,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: kPadding28,
+              SizedBox(
+                height: 250,
+                child: GridView.count(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  primary: false,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: kPadding28,
+                  ),
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 1,
+                  children: <Widget>[
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => const BootcampsList(),
+                          curve: Curves.easeInOutSine,
+                          transition: Transition.rightToLeftWithFade,
+                          duration: Duration(milliseconds: 500),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: kGrey85, width: 1),
+                          borderRadius: BorderRadius.circular(kBorderRadius26),
+                          image: const DecorationImage(
+                            colorFilter: ColorFilter.srgbToLinearGamma(),
+                            filterQuality: FilterQuality.high,
+                            image: AssetImage("assets/images/bootcamps.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: kPadding16, vertical: kPadding24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Bootcamps',
+                              style: kInterBold.copyWith(
+                                color: kWhiteFF,
+                                fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => const HackathonList(),
+                          curve: Curves.easeInOutSine,
+                          transition: Transition.rightToLeftWithFade,
+                          duration: Duration(milliseconds: 500),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: kGrey85, width: 1),
+                          borderRadius: BorderRadius.circular(kBorderRadius26),
+                          image: const DecorationImage(
+                            colorFilter: ColorFilter.srgbToLinearGamma(),
+                            filterQuality: FilterQuality.high,
+                            image: AssetImage("assets/images/hacakthon.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: kPadding16, vertical: kPadding24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Hackathons',
+                              style: kInterBold.copyWith(
+                                color: kWhiteFF,
+                                fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => const HackathonList(),
+                          curve: Curves.easeInOutSine,
+                          transition: Transition.rightToLeftWithFade,
+                          duration: Duration(milliseconds: 500),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: kGrey85, width: 1),
+                          borderRadius: BorderRadius.circular(kBorderRadius26),
+                          image: const DecorationImage(
+                            colorFilter: ColorFilter.srgbToLinearGamma(),
+                            filterQuality: FilterQuality.high,
+                            image: AssetImage("assets/images/techevents.jpg"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: kPadding16, vertical: kPadding24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Tech Events',
+                              style: kInterBold.copyWith(
+                                color: kWhiteFF,
+                                fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => const HackathonList(),
+                          curve: Curves.easeInOutSine,
+                          transition: Transition.rightToLeftWithFade,
+                          duration: Duration(milliseconds: 500),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: kGrey85, width: 1),
+                          borderRadius: BorderRadius.circular(kBorderRadius26),
+                          image: const DecorationImage(
+                            colorFilter: ColorFilter.srgbToLinearGamma(),
+                            filterQuality: FilterQuality.high,
+                            image: AssetImage("assets/images/confer.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: kPadding16, vertical: kPadding24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Tech Conferences',
+                              maxLines: 2,
+                              style: kInterBold.copyWith(
+                                color: kWhiteFF,
+                                fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => const HackathonList(),
+                          curve: Curves.easeInOutSine,
+                          transition: Transition.rightToLeftWithFade,
+                          duration: Duration(milliseconds: 500),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: kGrey85, width: 1),
+                          borderRadius: BorderRadius.circular(kBorderRadius26),
+                          image: const DecorationImage(
+                            colorFilter: ColorFilter.srgbToLinearGamma(),
+                            filterQuality: FilterQuality.high,
+                            image: AssetImage("assets/images/github.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: kPadding16, vertical: kPadding24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Open Source Github Repo',
+                              style: kInterBold.copyWith(
+                                color: kWhiteFF,
+                                fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 16,
-                crossAxisCount: 2,
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      Get.to(() => const EventDetailPage());
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(kBorderRadius26),
-                        image: const DecorationImage(
-                          image: AssetImage(
-                            'assets/images/bg-blue.jpg',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: kPadding16, vertical: kPadding24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Sleep Meditation',
-                            style: kInterBold.copyWith(
-                              color: kWhiteFF,
-                              fontSize: SizeConfig.blockSizeHorizontal! * 5,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(() => const BootcampsList());
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(kBorderRadius26),
-                        image: const DecorationImage(
-                          image: AssetImage(
-                            'assets/images/bg-blue.jpg',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: kPadding16, vertical: kPadding24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Sleep Meditation',
-                            style: kInterBold.copyWith(
-                              color: kWhiteFF,
-                              fontSize: SizeConfig.blockSizeHorizontal! * 5,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(kBorderRadius26),
-                      image: const DecorationImage(
-                        image: AssetImage(
-                          'assets/images/bg-blue.jpg',
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: kPadding16, vertical: kPadding24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Sleep Meditation',
-                          style: kInterBold.copyWith(
-                            color: kWhiteFF,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(kBorderRadius26),
-                      image: const DecorationImage(
-                        image: AssetImage(
-                          "assets/images/bg-blue.jpg",
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: kPadding16, vertical: kPadding24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Sleep Meditation',
-                          style: kInterBold.copyWith(
-                            color: kWhiteFF,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(kBorderRadius26),
-                      image: const DecorationImage(
-                        image: AssetImage(
-                          'assets/images/bg-blue.jpg',
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: kPadding16, vertical: kPadding24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Sleep Meditation',
-                          style: kInterBold.copyWith(
-                            color: kWhiteFF,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(kBorderRadius26),
-                      image: const DecorationImage(
-                        image: AssetImage(
-                          'assets/images/bg-blue.jpg',
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: kPadding16, vertical: kPadding24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Sleep Meditation',
-                          style: kInterBold.copyWith(
-                            color: kWhiteFF,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(kBorderRadius26),
-                      image: const DecorationImage(
-                        image: AssetImage(
-                          'assets/images/bg-blue.jpg',
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: kPadding16, vertical: kPadding24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Sleep Meditation',
-                          style: kInterBold.copyWith(
-                            color: kWhiteFF,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 5,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
               ),
               const SizedBox(
                 height: 50,
@@ -529,5 +401,45 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+}
+
+class BlinkingWidget extends StatefulWidget {
+  final List<Widget> children;
+  final Duration interval;
+
+  const BlinkingWidget({
+    Key? key,
+    required this.children,
+    this.interval = const Duration(milliseconds: 500),
+  }) : super(key: key);
+
+  @override
+  _BlinkingWidgetState createState() => _BlinkingWidgetState();
+}
+
+class _BlinkingWidgetState extends State<BlinkingWidget> {
+  bool _isVisible = true;
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(widget.interval, (timer) {
+      setState(() {
+        _isVisible = !_isVisible;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _isVisible ? Row(children: widget.children) : Container();
   }
 }

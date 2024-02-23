@@ -4,6 +4,8 @@ import 'package:codehub/widgets/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../auth/authsignin.dart';
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
 
@@ -122,7 +124,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               SizeConfig.blockSizeHorizontal! * 7.5),
                           child: ElevatedButton(
                             onPressed: () {
-                              Get.to(() => const EntryPoint());
+                              Get.to(() => const AuthPage(),
+                                curve: Curves.easeInOutSine,
+                                transition: Transition.rightToLeftWithFade,
+                                duration: Duration(milliseconds: 500),                              );
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.black,
