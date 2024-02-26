@@ -92,7 +92,7 @@ class _BootcampsListState extends State<BootcampsList> {
                       width: MediaQuery.of(context).size.width * 0.9,
                       decoration: BoxDecoration(
                         border: Border.all(color: kGrey8E),
-                        color: kBlackRich12,
+                        color: kBlack,
                         borderRadius: BorderRadius.circular(18),
                       ),
                       padding: const EdgeInsets.all(12),

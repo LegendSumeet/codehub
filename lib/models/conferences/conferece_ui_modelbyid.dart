@@ -18,6 +18,7 @@ class ConferenceBYid {
   final String location;
   final String organizer;
   final String website;
+  final String imglink;
   final String registrationLink;
   final List<String> topics;
   final List<String> speakers;
@@ -36,6 +37,7 @@ class ConferenceBYid {
     required this.id,
     required this.name,
     required this.description,
+    required this.imglink,
     required this.startDate,
     required this.endDate,
     required this.location,
@@ -59,6 +61,7 @@ class ConferenceBYid {
   factory ConferenceBYid.fromJson(Map<String, dynamic> json) => ConferenceBYid(
     id: json["_id"],
     name: json["name"],
+    imglink: json["imglink"],
     description: json["description"],
     startDate: DateTime.parse(json["startDate"]),
     endDate: DateTime.parse(json["endDate"]),

@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 
+
 Hacakthonbyid hacakthonbyidFromJson(String str) => Hacakthonbyid.fromJson(json.decode(str));
 
 String hacakthonbyidToJson(Hacakthonbyid data) => json.encode(data.toJson());
@@ -24,6 +25,8 @@ class Hacakthonbyid {
   final String rules;
   final String judgingCriteria;
   final String schedule;
+  final String imglink;
+  final String theme;
   final String additionalInfo;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -39,6 +42,8 @@ class Hacakthonbyid {
     required this.organizer,
     required this.website,
     required this.registrationLink,
+    required this.imglink,
+    required this.theme,
     required this.tags,
     required this.sponsors,
     required this.prizes,
@@ -57,6 +62,8 @@ class Hacakthonbyid {
   factory Hacakthonbyid.fromJson(Map<String, dynamic> json) => Hacakthonbyid(
     id: json["_id"],
     name: json["name"],
+    theme: json["theme"],
+    imglink: json["imglink"],
     description: json["description"],
     startDate: DateTime.parse(json["startDate"]),
     endDate: DateTime.parse(json["endDate"]),
@@ -81,6 +88,8 @@ class Hacakthonbyid {
 
   Map<String, dynamic> toJson() => {
     "_id": id,
+    "imglink":imglink,
+    "theme":theme,
     "name": name,
     "description": description,
     "startDate": startDate.toIso8601String(),

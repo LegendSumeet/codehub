@@ -1,16 +1,16 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:codehub/Screens/ListScreen/Conferences/ConferenceList.dart';
+import 'package:codehub/Screens/ListScreen/Events/EventList.dart';
 import 'package:codehub/Screens/ListScreen/hackathon/hackathonscreenlist.dart';
-import 'package:codehub/controllers/GetBootcamps/Getbootcampsbyid/bloc/bootcampsbyid_bloc.dart';
-import 'package:codehub/controllers/GetBootcamps/bloc/bootcamps_bloc.dart';
+import 'package:codehub/Screens/pdfprofile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../Contants/app_style.dart';
 import '../../widgets/SizeConfig.dart';
 import '../ListScreen/bootcamp/bootcampscreenlist.dart';
-import '../TechBootcampsScreen/Screen.dart';
-import '../eventdetails/eventpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -78,96 +78,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(
-                height: kPadding16,
-              ),
-              const SizedBox(
-                height: kPadding16,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: kPadding28,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    BuildText("Ongoing Events",
-                        MediaQuery.of(context).size.width, 16, kWhiteFF)
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: kPadding16,
-              ),
-              SizedBox(
-                height: 250,
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: 2,
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: kPadding18,
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          Get.to(() => const HackathonList(),
-                            curve: Curves.easeInOutSine,
-                            transition: Transition.rightToLeftWithFade,
-                            duration: Duration(milliseconds: 500),
-                          );
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.81,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: kGrey85, width: 1),
-                            borderRadius:
-                                BorderRadius.circular(kBorderRadius26),
-                            image: const DecorationImage(
-                              colorFilter: ColorFilter.srgbToLinearGamma(),
-                              filterQuality: FilterQuality.high,
-                              image: AssetImage("assets/images/liveh.jpg"),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: kPadding16, vertical: kPadding24),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Hackathons',
-                                style: kInterBold.copyWith(
-                                  color: kWhiteFF,
-                                  fontSize: SizeConfig.blockSizeHorizontal! * 5,
-                                ),
-                              ),
-                              const BlinkingWidget(
-                                children: [
-                                  Text(
-                                    'LIVE',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                      width:
-                                          16.0), // Adjust spacing if necessary
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(
                 height: kPadding28,
               ),
               Padding(
@@ -185,7 +95,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Text(
                       'Explore opportunities that best suits your skills and interests!',
-                      style: kInterBold.copyWith(
+                      style: TextStyle(
+                        fontFamily: "Mulish",
                         color: kWhiteFF.withOpacity(0.6),
                         fontSize: SizeConfig.blockSizeHorizontal! * 4,
                       ),
@@ -211,7 +122,8 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     InkWell(
                       onTap: () {
-                        Get.to(() => const BootcampsList(),
+                        Get.to(
+                          () => const BootcampsList(),
                           curve: Curves.easeInOutSine,
                           transition: Transition.rightToLeftWithFade,
                           duration: Duration(milliseconds: 500),
@@ -236,7 +148,8 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               'Bootcamps',
-                              style: kInterBold.copyWith(
+                              style: TextStyle(
+                                fontFamily: "Mulish",
                                 color: kWhiteFF,
                                 fontSize: SizeConfig.blockSizeHorizontal! * 5,
                               ),
@@ -247,7 +160,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(() => const HackathonList(),
+                        Get.to(
+                          () => const HackathonList(),
                           curve: Curves.easeInOutSine,
                           transition: Transition.rightToLeftWithFade,
                           duration: Duration(milliseconds: 500),
@@ -272,8 +186,9 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               'Hackathons',
-                              style: kInterBold.copyWith(
+                              style: TextStyle(
                                 color: kWhiteFF,
+                                fontFamily: "Mulish",
                                 fontSize: SizeConfig.blockSizeHorizontal! * 5,
                               ),
                             ),
@@ -283,7 +198,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(() => const HackathonList(),
+                        Get.to(
+                          () => const EventList(),
                           curve: Curves.easeInOutSine,
                           transition: Transition.rightToLeftWithFade,
                           duration: Duration(milliseconds: 500),
@@ -308,7 +224,8 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               'Tech Events',
-                              style: kInterBold.copyWith(
+                              style: TextStyle(
+                                fontFamily: "Mulish",
                                 color: kWhiteFF,
                                 fontSize: SizeConfig.blockSizeHorizontal! * 5,
                               ),
@@ -319,7 +236,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(() => const HackathonList(),
+                        Get.to(
+                          () => const ConferenceList(),
                           curve: Curves.easeInOutSine,
                           transition: Transition.rightToLeftWithFade,
                           duration: Duration(milliseconds: 500),
@@ -345,8 +263,9 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               'Tech Conferences',
                               maxLines: 2,
-                              style: kInterBold.copyWith(
+                              style: TextStyle(
                                 color: kWhiteFF,
+                                fontFamily: "Mulish",
                                 fontSize: SizeConfig.blockSizeHorizontal! * 5,
                               ),
                             ),
@@ -356,7 +275,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(() => const HackathonList(),
+                        Get.to(
+                          () => const HackathonList(),
                           curve: Curves.easeInOutSine,
                           transition: Transition.rightToLeftWithFade,
                           duration: Duration(milliseconds: 500),
@@ -381,7 +301,8 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               'Open Source Github Repo',
-                              style: kInterBold.copyWith(
+                              style: TextStyle(
+                                fontFamily: "Mulish",
                                 color: kWhiteFF,
                                 fontSize: SizeConfig.blockSizeHorizontal! * 5,
                               ),
@@ -391,6 +312,41 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ],
+                ),
+              ),
+              const SizedBox(
+                height: kPadding28,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: kPadding28,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BuildText("Developer Roadmaps!",
+                        MediaQuery.of(context).size.width, 16, kWhiteFF),
+                    const SizedBox(
+                      height: kPadding4,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: kPadding16,
+              ),
+              SizedBox(
+                height: 250,
+                child: GridView.count(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  primary: false,
+                  padding: const EdgeInsets.symmetric(horizontal: kPadding28),
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 1,
+                  children: generateGridItemsFromJson(jsonString),
                 ),
               ),
               const SizedBox(
@@ -404,42 +360,129 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class BlinkingWidget extends StatefulWidget {
-  final List<Widget> children;
-  final Duration interval;
+List<Widget> generateGridItemsFromJson(String jsonStr) {
+  List<dynamic> data = json.decode(jsonStr);
+  List<Widget> items = [];
 
-  const BlinkingWidget({
-    Key? key,
-    required this.children,
-    this.interval = const Duration(milliseconds: 500),
-  }) : super(key: key);
-
-  @override
-  _BlinkingWidgetState createState() => _BlinkingWidgetState();
+  data.forEach((item) {
+    GridItem gridItem = GridItem.fromJson(item);
+    items.add(
+      InkWell(
+        onTap: () {
+          Get.to(
+            () => PdfProfile(
+              title: gridItem.title,
+              desciptions: gridItem.info,
+              ownersite: gridItem.ownersite,
+              linkpdf: gridItem.pdflink,
+              imglink: gridItem.imglink,
+              credit: gridItem.owner,
+            ),
+            curve: Curves.easeInOutSine,
+            transition: Transition.rightToLeftWithFade,
+            duration: Duration(milliseconds: 500),
+          );
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: kGrey85, width: 1),
+            borderRadius: BorderRadius.circular(kBorderRadius26),
+          ),
+          padding: const EdgeInsets.symmetric(
+              horizontal: kPadding16, vertical: kPadding24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: kPadding16,
+                ),
+                child: Text(
+                  gridItem.title,
+                  maxLines: 2,
+                  semanticsLabel: gridItem.title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontFamily: "Mulish",
+                    color: kWhiteFF,
+                    fontSize: SizeConfig.blockSizeHorizontal! * 4.5,
+                  ),
+                ),
+              ),
+              Divider(
+                color: kGreyB7,
+              ),
+              Image.network(
+                gridItem.imagePath,
+                fit: BoxFit.cover,
+                height: 150,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  });
+  return items; // Add this return statement
 }
 
-class _BlinkingWidgetState extends State<BlinkingWidget> {
-  bool _isVisible = true;
-  late Timer _timer;
+class GridItem {
+  final String title;
+  final String imagePath;
+  final String route;
+  final String owner;
+  final String info;
+  final String imglink;
+  final String pdflink;
+  final String ownersite; // New field
 
-  @override
-  void initState() {
-    super.initState();
-    _timer = Timer.periodic(widget.interval, (timer) {
-      setState(() {
-        _isVisible = !_isVisible;
-      });
-    });
-  }
+  GridItem({
+    required this.title,
+    required this.imagePath,
+    required this.route,
+    required this.owner,
+    required this.info,
+    required this.imglink,
+    required this.pdflink,
+    required this.ownersite, // New field
+  });
 
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _isVisible ? Row(children: widget.children) : Container();
+  factory GridItem.fromJson(Map<String, dynamic> json) {
+    return GridItem(
+      title: json['title'],
+      imagePath: json['imagePath'],
+      route: json['route'],
+      owner: json['owner'],
+      info: json['info'],
+      imglink: json['imglink'],
+      pdflink: json['pdflink'],
+      ownersite: json['ownersite'], // New field
+    );
   }
 }
+
+String jsonString = '''
+[
+  {
+    "title": "Frontend Developer",
+    "imagePath": "https://www.simplilearn.com/ice9/free_resources_article_thumb/full_front_back.jpg",
+    "owner":"roadmap.sh by kamrify",
+    "info":"Step by step guide to becoming an Android developer in 2024",
+    "imglink":"https://miro.medium.com/v2/resize:fit:1358/1*qx9L1NCkuf2-gxT_ZzC-ig.jpeg",
+    "pdflink":"https://roadmap.sh/pdfs/roadmaps/frontend.pdf",
+    "ownersite": "https://roadmap.sh/",
+    "route": "bootcamp_route1"
+  },
+  {
+    "title": "FrontEnd Developer",
+    "imagePath": "https://miro.medium.com/v2/resize:fit:1358/1*qx9L1NCkuf2-gxT_ZzC-ig.jpeg",
+    "owner":"roadmap.sh by kamrify",
+    "info":"Step by step guide to becoming an Android developer in 2024",
+    "imglink":"https://miro.medium.com/v2/resize:fit:1358/1*qx9L1NCkuf2-gxT_ZzC-ig.jpeg",
+    "pdflink":"https://roadmap.sh/pdfs/roadmaps/frontend.pdf",
+    "ownersite": "https://roadmap.sh/",
+    "route": "bootcamp_route1"
+  }
+]
+''';

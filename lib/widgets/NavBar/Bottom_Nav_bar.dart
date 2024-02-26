@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 
+import '../../Screens/guidebook/GuidesScreen.dart';
 import '../../screens/HomeScreen/homepage.dart';
-import '../../screens/GuidesScreen/GuidesScreen.dart';
 import '../../screens/ProfileScreen/ProfileScreen.dart';
 
 class EntryPoint extends StatefulWidget {

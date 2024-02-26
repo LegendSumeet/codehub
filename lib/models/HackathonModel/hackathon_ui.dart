@@ -13,6 +13,8 @@ class Hacakthon {
   final DateTime endDate;
   final String location;
   final String organizer;
+  final String imglink;
+  final String theme;
   final String website;
   final String registrationLink;
   final List<String> tags;
@@ -32,6 +34,8 @@ class Hacakthon {
   Hacakthon({
     required this.id,
     required this.name,
+    required this.imglink,
+    required this.theme,
     required this.description,
     required this.startDate,
     required this.endDate,
@@ -57,6 +61,8 @@ class Hacakthon {
   factory Hacakthon.fromJson(Map<String, dynamic> json) => Hacakthon(
     id: json["_id"],
     name: json["name"],
+    theme: json["theme"],
+    imglink: json["imglink"],
     description: json["description"],
     startDate: DateTime.parse(json["startDate"]),
     endDate: DateTime.parse(json["endDate"]),
@@ -82,6 +88,8 @@ class Hacakthon {
   Map<String, dynamic> toJson() => {
     "_id": id,
     "name": name,
+    "imglink":imglink,
+    "theme":theme,
     "description": description,
     "startDate": startDate.toIso8601String(),
     "endDate": endDate.toIso8601String(),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Widget BuildText(
@@ -10,8 +9,7 @@ Widget BuildText(
 ) {
   return Text(
     title,
-    textAlign: TextAlign.start
-    ,
+    textAlign: TextAlign.start,
     style: TextStyle(
       color: textColor,
       fontFamily: "Mulish",
@@ -67,11 +65,10 @@ Gradient kLinearGradientDarkBlue = LinearGradient(
   end: Alignment.topCenter,
   colors: <Color>[
     Colors.blue.shade800.withOpacity(0.8), // Dark blue color
-    Colors.blue.shade400.withOpacity(0),   // Transparent blue
+    Colors.blue.shade400.withOpacity(0), // Transparent blue
   ],
   tileMode: TileMode.clamp,
 );
-
 
 const Gradient kLinearGradientBlue = LinearGradient(
   begin: Alignment.topCenter,
@@ -98,21 +95,7 @@ Gradient kLinearGradientWhite = LinearGradient(
 // =========================== //
 
 /* Start of BorderRadius */
-final kInterBold = GoogleFonts.inter(
-  fontWeight: FontWeight.w700,
-);
 
-final kInterSemibold = GoogleFonts.inter(
-  fontWeight: FontWeight.w600,
-);
-
-final kInterMedium = GoogleFonts.inter(
-  fontWeight: FontWeight.w500,
-);
-
-final kInterRegular = GoogleFonts.inter(
-  fontWeight: FontWeight.w400,
-);
 const double kBorderRadius20 = 20.0;
 const double kBorderRadius5 = 5.0;
 
@@ -140,22 +123,6 @@ final kInputBorder = OutlineInputBorder(
 // =========================== //
 
 /* Start of Font */
-
-final kRalewayBold = GoogleFonts.raleway(
-  fontWeight: FontWeight.w700,
-);
-
-final kRalewaySemibold = GoogleFonts.raleway(
-  fontWeight: FontWeight.w600,
-);
-
-final kRalewayMedium = GoogleFonts.raleway(
-  fontWeight: FontWeight.w500,
-);
-
-final kRalewayRegular = GoogleFonts.raleway(
-  fontWeight: FontWeight.w400,
-);
 
 /* End of Font */
 

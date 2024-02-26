@@ -1,27 +1,34 @@
 import 'package:codehub/Contants/app_style.dart';
-import 'package:codehub/Screens/HackathonScreen/HackathonScreen.dart';
+import 'package:codehub/Screens/ConferenceScreen/ConferencePage.dart';
+import 'package:codehub/Screens/TechEventsScreen/TechEventScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../../controllers/GetHackathons/bloc/hackathons_bloc.dart';
-import '../../../widgets/SizeConfig.dart';
 
-class HackathonList extends StatefulWidget {
-  const HackathonList({Key? key}) : super(key: key);
+import '../../../controllers/GetBootcamps/bloc/bootcamps_bloc.dart';
+import '../../../controllers/GetConfernces/bloc/Conference_bloc.dart';
+import '../../../controllers/GetTechEvents/bloc/TechEvents_bloc.dart';
+import '../../../widgets/SizeConfig.dart';
+import '../../TechBootcampsScreen/Screen.dart';
+
+class ConferenceList extends StatefulWidget {
+  const ConferenceList({Key? key}) : super(key: key);
 
   @override
-  State<HackathonList> createState() => _HackathonListState();
+  State<ConferenceList> createState() => _ConferenceListState();
 }
 
-class _HackathonListState extends State<HackathonList> {
-  final HackathonsBloc hackathonsbloc = HackathonsBloc();
+class _ConferenceListState extends State<ConferenceList> {
+  final ConferenceBloc conferenceBloc = ConferenceBloc();
 
   @override
   void initState() {
-    hackathonsbloc.add(HackathonInitialFetchEvent());
+    conferenceBloc.add(ConferenceInitialFetchEvent());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +36,7 @@ class _HackathonListState extends State<HackathonList> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Hackathons",
+          "Tech Events",
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -48,13 +55,13 @@ class _HackathonListState extends State<HackathonList> {
           icon: const Icon(Icons.arrow_back_ios_new_outlined),
         ),
       ),
-      body: BlocConsumer<HackathonsBloc, HackathonsState>(
-        bloc: hackathonsbloc,
-        listenWhen: (previous, current) => current is HackathonsActionState,
-        buildWhen: (previous, current) => current is! HackathonsActionState,
+      body: BlocConsumer<ConferenceBloc, ConferenceState>(
+        bloc: conferenceBloc,
+        listenWhen: (previous, current) => current is ConferenceActionState,
+        buildWhen: (previous, current) => current is! ConferenceActionState,
         builder: (context, state) {
           switch (state.runtimeType) {
-            case HackathonsFetchingLoadingState:
+            case ConferenceFetchingLoadingState:
               return GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 1,
@@ -75,11 +82,11 @@ class _HackathonListState extends State<HackathonList> {
                   );
                 },
               );
-            case HackathonsFetchingSuccessfulState:
-              final successState = state as HackathonsFetchingSuccessfulState;
+            case ConferenceFetchingSuccessfulState:
+              final successState = state as ConferenceFetchingSuccessfulState;
               return ListView.builder(
                 physics: const BouncingScrollPhysics(),
-                itemCount: successState.hackathons.length,
+                itemCount: successState.ConferenceData.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Padding(
@@ -104,14 +111,18 @@ class _HackathonListState extends State<HackathonList> {
                             height: MediaQuery.of(context).size.width * 0.4,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: NetworkImage(
-                                    successState.hackathons[index].imglink),
+                                image: NetworkImage(successState
+                                    .ConferenceData[index]
+                                    .imglink),
                                 fit: BoxFit.cover,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          const SizedBox(width: 12),
+                          const SizedBox(
+                              width:
+                              12), // Add some spacing between image and text
+                          // Column for text content
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,23 +132,22 @@ class _HackathonListState extends State<HackathonList> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     BuildText(
-                                      successState.hackathons[index].name,
+                                      successState.ConferenceData[index].name,
                                       MediaQuery.of(context).size.width,
                                       MediaQuery.of(context).size.width * 0.05,
                                       kWhiteFF,
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      successState
-                                          .hackathons[index].description,
+                                      successState.ConferenceData[index].description,
                                       maxLines: 5,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         fontFamily: "Mulish",
                                         color: Colors.white.withOpacity(0.6),
                                         fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.04,
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -151,27 +161,22 @@ class _HackathonListState extends State<HackathonList> {
                                 InkWell(
                                   hoverColor: kWhiteF7,
                                   onTap: () {
-                                    Get.to(
-                                      () => HackathonPage(
-                                        reqid:
-                                            successState.hackathons[index].id,
-                                      ),
-                                    );
+                                   Get.to(()=> ConferencePage(reqid:successState.ConferenceData[index].id ));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 8.0),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           "View More",
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                                .size
+                                                .width *
                                                 0.04,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -191,12 +196,7 @@ class _HackathonListState extends State<HackathonList> {
               );
 
             default:
-              return Container(
-                child: Text(
-                  "i am data",
-                  style: TextStyle(color: kWhite),
-                ),
-              );
+              return Container();
           }
         },
         listener: (context, state) {},
@@ -209,7 +209,7 @@ Widget buildStatusContainer(
     {required IconData icon, required String text, required Color color}) {
   return Container(
     transform:
-        Matrix4.translationValues(SizeConfig.blockSizeHorizontal! * 16, 0, 0),
+    Matrix4.translationValues(SizeConfig.blockSizeHorizontal! * 16, 0, 0),
     height: SizeConfig.blockSizeVertical! * 20,
     color: color,
     padding: const EdgeInsets.symmetric(
@@ -228,7 +228,7 @@ Widget buildStatusContainer(
           width: 4,
         ),
         Text(text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
             )),
       ],

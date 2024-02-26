@@ -56,10 +56,13 @@ class _TechBootcampPageState extends State<TechBootcampPage> {
                       vertical: kPadding16,
                     ),
                     backgroundColor: kBlackRichLight1C,
-                    textStyle: kInterBold.copyWith(
-                      color: kWhiteFF,
-                      fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                    )),
+                    textStyle: TextStyle(
+                      fontFamily: "Mulish",
+                      color: kWhiteF7,
+                      fontSize:
+                      SizeConfig.blockSizeHorizontal! * 4,
+                      fontWeight: FontWeight.bold,
+                    ),),
                 onPressed: () {},
                 child: const Text(
                   'Register Now',
@@ -124,9 +127,12 @@ class _TechBootcampPageState extends State<TechBootcampPage> {
                           ),
                           child: Text(
                             successState.bootcamps.name,
-                            style: kInterBold.copyWith(
-                              color: kWhiteFF,
-                              fontSize: SizeConfig.blockSizeHorizontal! * 7.5,
+                            style: TextStyle(
+                              fontFamily: "Mulish",
+                              color: kWhiteF7,
+                              fontSize:
+                              SizeConfig.blockSizeHorizontal! * 7.5,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -139,9 +145,13 @@ class _TechBootcampPageState extends State<TechBootcampPage> {
                           ),
                           child: Text(
                             successState.bootcamps.category,
-                            style: kInterRegular.copyWith(
-                              color: kWhiteFF.withOpacity(0.7),
-                              fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                            style: TextStyle(
+                              fontFamily: "Mulish",
+                              color: kWhiteF7,
+                              fontSize:
+                              SizeConfig.blockSizeHorizontal! *
+                                  4,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -198,11 +208,13 @@ class _TechBootcampPageState extends State<TechBootcampPage> {
                                     child: Center(
                                       child: Text(
                                         successState.bootcamps.tags[index],
-                                        style: kInterBold.copyWith(
-                                          color: kWhiteFF,
+                                        style:TextStyle(
+                                          fontFamily: "Mulish",
+                                          color: kWhiteF7,
                                           fontSize:
-                                              SizeConfig.blockSizeHorizontal! *
-                                                  3.5,
+                                          SizeConfig.blockSizeHorizontal! *
+                                              3.5,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ),

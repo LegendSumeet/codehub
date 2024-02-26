@@ -16,6 +16,7 @@ class Conferences {
   final String website;
   final String registrationLink;
   final List<String> topics;
+  final String imglink;
   final List<String> speakers;
   final List<String> sponsors;
   final String contactEmail;
@@ -30,6 +31,7 @@ class Conferences {
 
   Conferences({
     required this.id,
+    required this.imglink,
     required this.name,
     required this.description,
     required this.startDate,
@@ -54,6 +56,7 @@ class Conferences {
 
   factory Conferences.fromJson(Map<String, dynamic> json) => Conferences(
     id: json["_id"],
+    imglink: json["imglink"],
     name: json["name"],
     description: json["description"],
     startDate: DateTime.parse(json["startDate"]),
@@ -78,6 +81,7 @@ class Conferences {
 
   Map<String, dynamic> toJson() => {
     "_id": id,
+    "imglink":imglink,
     "name": name,
     "description": description,
     "startDate": startDate.toIso8601String(),
