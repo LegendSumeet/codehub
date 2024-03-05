@@ -12,7 +12,7 @@ class BootCampsFetchingLoadingState extends BootCampsState {}
 class BootCampsFetchingErrorState extends BootCampsState {}
 
 class BootCampsFetchingSuccessfulState extends BootCampsState {
-  final  List<BootcampModel> bootcamps;
+  final List<BootcampModel> bootcamps;
 
   BootCampsFetchingSuccessfulState({required this.bootcamps});
 }

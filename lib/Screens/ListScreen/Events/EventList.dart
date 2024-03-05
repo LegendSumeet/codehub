@@ -108,18 +108,37 @@ class _EventListState extends State<EventList> {
                             width: MediaQuery.of(context).size.width * 0.3,
                             height: MediaQuery.of(context).size.width * 0.4,
                             decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(successState
-                                    .techEvents[index]
-                                    .imglink), // Provide the URL of the image
-                                fit: BoxFit.cover,
-                              ),
                               borderRadius: BorderRadius.circular(8),
                             ),
+                            child: successState.techEvents[index].imglink !=
+                                    null
+                                ? Image.network(
+                                    successState.techEvents[index].imglink,
+                                    fit: BoxFit.cover,
+                                    loadingBuilder: (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return Shimmer.fromColors(
+                                        baseColor: Colors.grey[300]!,
+                                        highlightColor: Colors.grey[100]!,
+                                        child: Container(
+                                          color: Colors.white,
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Shimmer.fromColors(
+                                    baseColor: Colors.grey[300]!,
+                                    highlightColor: Colors.grey[100]!,
+                                    child: Container(
+                                      color: Colors.white,
+                                    ),
+                                  ),
                           ),
                           const SizedBox(
                               width:
-                              12), // Add some spacing between image and text
+                                  12), // Add some spacing between image and text
                           // Column for text content
                           Expanded(
                             child: Column(
@@ -137,15 +156,16 @@ class _EventListState extends State<EventList> {
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      successState.techEvents[index].description,
+                                      successState
+                                          .techEvents[index].description,
                                       maxLines: 5,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         fontFamily: "Mulish",
                                         color: Colors.white.withOpacity(0.6),
                                         fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.04,
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -160,8 +180,9 @@ class _EventListState extends State<EventList> {
                                   hoverColor: kWhiteF7,
                                   onTap: () {
                                     Get.to(
-                                          () => EventPage(
-                                        reqid: successState.techEvents[index].id,
+                                      () => EventPage(
+                                        reqid:
+                                            successState.techEvents[index].id,
                                       ),
                                     );
                                   },
@@ -170,15 +191,15 @@ class _EventListState extends State<EventList> {
                                         vertical: 8.0),
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           "View More",
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: MediaQuery.of(context)
-                                                .size
-                                                .width *
+                                                    .size
+                                                    .width *
                                                 0.04,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -211,7 +232,7 @@ Widget buildStatusContainer(
     {required IconData icon, required String text, required Color color}) {
   return Container(
     transform:
-    Matrix4.translationValues(SizeConfig.blockSizeHorizontal! * 16, 0, 0),
+        Matrix4.translationValues(SizeConfig.blockSizeHorizontal! * 16, 0, 0),
     height: SizeConfig.blockSizeVertical! * 20,
     color: color,
     padding: const EdgeInsets.symmetric(

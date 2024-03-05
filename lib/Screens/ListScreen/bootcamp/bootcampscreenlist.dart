@@ -106,14 +106,33 @@ class _BootcampsListState extends State<BootcampsList> {
                             width: MediaQuery.of(context).size.width * 0.3,
                             height: MediaQuery.of(context).size.width * 0.4,
                             decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(successState
-                                    .bootcamps[index]
-                                    .imageUrl), // Provide the URL of the image
-                                fit: BoxFit.cover,
-                              ),
                               borderRadius: BorderRadius.circular(8),
                             ),
+                            child: successState.bootcamps[index].imageUrl !=
+                                    null
+                                ? Image.network(
+                                    successState.bootcamps[index].imageUrl,
+                                    fit: BoxFit.cover,
+                                    loadingBuilder: (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return Shimmer.fromColors(
+                                        baseColor: Colors.grey[300]!,
+                                        highlightColor: Colors.grey[100]!,
+                                        child: Container(
+                                          color: Colors.white,
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Shimmer.fromColors(
+                                    baseColor: Colors.grey[300]!,
+                                    highlightColor: Colors.grey[100]!,
+                                    child: Container(
+                                      color: Colors.white,
+                                    ),
+                                  ),
                           ),
                           const SizedBox(
                               width:

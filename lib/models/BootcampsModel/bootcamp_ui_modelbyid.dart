@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final bootcampsByid = bootcampsByidFromJson(jsonString);
-
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
@@ -26,6 +22,8 @@ class BootcampsByid {
   final DateTime createdAt;
   final DateTime updatedAt;
   final int v;
+
+
 
   BootcampsByid({
     required this.id,

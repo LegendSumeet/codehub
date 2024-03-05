@@ -2,7 +2,7 @@
     <application
         android:label="codehub"
         android:name="${applicationName}"
-        android:icon="@mipmap/codehublogo">
+        android:icon="@drawable/logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"

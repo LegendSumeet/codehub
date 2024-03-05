@@ -1,7 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:ffi';
-import 'package:codehub/Contants/app_style.dart';
 import 'package:codehub/models/BootcampsModel/bootcamp_ui_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';

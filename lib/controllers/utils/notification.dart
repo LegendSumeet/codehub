@@ -1,60 +1,72 @@
-import 'dart:convert';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-Future<void> handleBackgroundMessage(RemoteMessage message) async {
-  print(message.notification?.title);
-}
 
-class FirebaseApi {
-  final _firebaseMessaging = FirebaseMessaging.instance;
+import '../../main.dart';
 
-  final _androidChannel = const AndroidNotificationChannel(
-      'high_importance_channel', 'high_importance_notification',
-      description: "this channel is used for important notification",
-      importance: Importance.high);
-
-  final _localNoti = FlutterLocalNotificationsPlugin();
-
-  Future<void> initNotification() async {
-    await _firebaseMessaging.requestPermission();
-    final token = await _firebaseMessaging.getToken();
-    print(token);
-    FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
-    FirebaseMessaging.onMessage.listen((message) {
-      final noti = message.notification;
-      if (noti == null) return;
-      _localNoti.show(
-        noti.hashCode,
-        noti.title,
-        noti.body,
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-            _androidChannel.id,
-            _androidChannel.name,
-            channelDescription: _androidChannel.description,
-            icon: '@mipmap/codehublogo',
-          ),
-        ),
-        payload: jsonEncode(message.toMap()),
-      );
-    });
-  }
-  Future<void> localInitNotification() async {
-    const android = AndroidInitializationSettings('@mipmap/codehublogo');
-    const settings = InitializationSettings(android: android);
-
-    await _localNoti.initialize(
-      settings,
-      onDidReceiveNotificationResponse: (payload) async {
-        if (payload != null) {
-          final message = RemoteMessage.fromMap(jsonDecode(payload as String));
-          handleBackgroundMessage(message);
-        }
-      },
+class PushNotifications {
+  static final _firebaseMessaging = FirebaseMessaging.instance;
+  static final FlutterLocalNotificationsPlugin
+  _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  // request notification permission
+  static Future init() async {
+    await _firebaseMessaging.requestPermission(
+      alert: true,
+      announcement: true,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
     );
-    final platform = _localNoti.resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>();
+    // get the device fcm token
+    final token = await _firebaseMessaging.getToken();
+    print("device token: $token");
+  }
+
+// initalize local notifications
+  static Future localNotiInit() async {
+
+    const AndroidInitializationSettings initializationSettingsAndroid =
+    AndroidInitializationSettings('@drawable/logo');
+    final DarwinInitializationSettings initializationSettingsDarwin =
+    DarwinInitializationSettings(
+      onDidReceiveLocalNotification: (id, title, body, payload) => null,
+    );
+    final LinuxInitializationSettings initializationSettingsLinux =
+    LinuxInitializationSettings(defaultActionName: 'Open notification');
+    final InitializationSettings initializationSettings =
+    InitializationSettings(
+        android: initializationSettingsAndroid,
+        iOS: initializationSettingsDarwin,
+        linux: initializationSettingsLinux);
+    _flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onDidReceiveNotificationResponse: onNotificationTap,
+        onDidReceiveBackgroundNotificationResponse: onNotificationTap);
+  }
+
+
+
+  static void onNotificationTap(NotificationResponse notificationResponse) {
+    navigatorKey.currentState!
+        .pushNamed("/message", arguments: notificationResponse);
+  }
+
+  // show a simple notification
+  static Future showSimpleNotification({
+    required String title,
+    required String body,
+    required String payload,
+  }) async {
+    const AndroidNotificationDetails androidNotificationDetails =
+    AndroidNotificationDetails('your channel id', 'your channel name',
+        channelDescription: 'your channel description',
+        importance: Importance.max,
+        priority: Priority.high,
+        ticker: 'ticker');
+    const NotificationDetails notificationDetails =
+    NotificationDetails(android: androidNotificationDetails);
+    await _flutterLocalNotificationsPlugin
+        .show(0, title, body, notificationDetails, payload: payload);
   }
 }
