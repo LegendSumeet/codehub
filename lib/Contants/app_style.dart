@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
+
 Widget BuildText(
   String title,
   double width,
@@ -64,8 +66,8 @@ Gradient kLinearGradientDarkBlue = LinearGradient(
   begin: Alignment.bottomCenter,
   end: Alignment.topCenter,
   colors: <Color>[
-    Colors.blue.shade800.withOpacity(0.8), // Dark blue color
-    Colors.blue.shade400.withOpacity(0), // Transparent blue
+    Colors.blue.shade800.withOpacity(0.8),
+    Colors.blue.shade400.withOpacity(0),
   ],
   tileMode: TileMode.clamp,
 );
@@ -90,26 +92,11 @@ Gradient kLinearGradientWhite = LinearGradient(
   tileMode: TileMode.clamp,
 );
 
-/* End of Gradient Style */
-
-// =========================== //
-
-/* Start of BorderRadius */
 
 const double kBorderRadius20 = 20.0;
 const double kBorderRadius5 = 5.0;
 
-/* End of BorderRadius */
 
-// =========================== //
-
-/* Start of Padding */
-
-/* End of Padding */
-
-// =========================== //
-
-/* Start of Input Style */
 
 final kInputBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(kBorderRadius10),
@@ -118,13 +105,6 @@ final kInputBorder = OutlineInputBorder(
   ),
 );
 
-/* End of Input Style */
-
-// =========================== //
-
-/* Start of Font */
-
-/* End of Font */
 
 class appinfo {
   static String servertoken = "qwewrtyuioplkfgfjifgodoigpidfjgp";

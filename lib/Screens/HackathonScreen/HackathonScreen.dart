@@ -11,7 +11,8 @@ import '../../widgets/SizeConfig.dart';
 
 class HackathonPage extends StatefulWidget {
   final String reqid;
-  const HackathonPage({super.key, required this.reqid});
+  final String regurl;
+  const HackathonPage({super.key, required this.reqid, required this.regurl});
 
   @override
   State<HackathonPage> createState() => _HackathonPageState();
@@ -66,7 +67,10 @@ class _HackathonPageState extends State<HackathonPage> {
                           4,
                       fontWeight: FontWeight.bold,
                     ),),
-                onPressed: () {},
+                onPressed: () {
+                  appinfo.openExternalApplication(
+                      widget.regurl);
+                },
                 child: const Text(
                   'Register Now',
                 ),

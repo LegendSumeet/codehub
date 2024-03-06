@@ -9,7 +9,8 @@ import '../../widgets/SizeConfig.dart';
 
 class TechBootcampPage extends StatefulWidget {
   final String reqid;
-  const TechBootcampPage({super.key, required this.reqid});
+  final String regurl;
+  const TechBootcampPage({super.key, required this.reqid, required this.regurl});
 
   @override
   State<TechBootcampPage> createState() => _TechBootcampPageState();
@@ -40,7 +41,8 @@ class _TechBootcampPageState extends State<TechBootcampPage> {
         ),
         floatingActionButton: GestureDetector(
           onTap: () {
-            debugPrint('Start Tapped');
+            appinfo.openExternalApplication(
+                widget.regurl);
           },
           child: Container(
             margin: const EdgeInsets.symmetric(
@@ -63,7 +65,10 @@ class _TechBootcampPageState extends State<TechBootcampPage> {
                       SizeConfig.blockSizeHorizontal! * 4,
                       fontWeight: FontWeight.bold,
                     ),),
-                onPressed: () {},
+                onPressed: () {
+                  appinfo.openExternalApplication(
+                      widget.regurl);
+                },
                 child: const Text(
                   'Register Now',
                 ),
@@ -227,37 +232,7 @@ class _TechBootcampPageState extends State<TechBootcampPage> {
                         const SizedBox(
                           height: kPadding16,
                         ),
-                        const SizedBox(
-                          height: kPadding16,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            appinfo.openExternalApplication(
-                                successState.bootcamps.website);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: kPadding28,
-                            ),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Visit Website",
-                                  style: TextStyle(
-                                    fontFamily: "Mulish",
-                                    color: kBlueAzure4A,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.04,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Icon(Icons.link_sharp,
-                                    color: kBlueAzure4A),
-                              ],
-                            ),
-                          ),
-                        ),
+
                         const SizedBox(
                           height: kPadding16,
                         ),

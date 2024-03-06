@@ -9,7 +9,8 @@ import '../../widgets/SizeConfig.dart';
 
 class EventPage extends StatefulWidget {
   final String reqid;
-  const EventPage({super.key, required this.reqid});
+  final String regurl;
+  const EventPage({super.key, required this.reqid, required this.regurl});
 
   @override
   State<EventPage> createState() => _EventPageState();
@@ -63,7 +64,10 @@ class _EventPageState extends State<EventPage> {
                       SizeConfig.blockSizeHorizontal! * 4,
                       fontWeight: FontWeight.bold,
                     ),),
-                onPressed: () {},
+                onPressed: () {
+                  appinfo.openExternalApplication(
+                      widget.regurl);
+                },
                 child: const Text(
                   'Register Now',
                 ),

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:codehub/Contants/app_style.dart';
 import 'package:codehub/widgets/NavBar/Bottom_Nav_bar.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -19,8 +21,6 @@ Future _firebaseBackgroundMessage(RemoteMessage message) async {
   }
 }
 
-
-
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   final SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -30,6 +30,9 @@ void main(List<String> args) async {
   }
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseAppCheck.instance.activate(
+    androidProvider: AndroidProvider.playIntegrity,
   );
   await PushNotifications.init();
   await PushNotifications.localNotiInit();
@@ -54,13 +57,14 @@ class CodeHub extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      color: kBlack0D,
       debugShowCheckedModeBanner: false,
       title: 'CodeHub App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home: EntryPoint(),
+      home: defaulthome,
     );
   }
 }

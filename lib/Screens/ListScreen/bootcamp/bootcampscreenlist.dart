@@ -80,138 +80,166 @@ class _BootcampsListState extends State<BootcampsList> {
               );
             case BootCampsFetchingSuccessfulState:
               final successState = state as BootCampsFetchingSuccessfulState;
-              return ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: successState.bootcamps.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
+              return Column(
+                children: [
+                  Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: kPadding18, vertical: kPadding8),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: kGrey8E),
-                        color: kBlack,
-                        borderRadius: BorderRadius.circular(18),
+                      horizontal: kPadding18, vertical: kPadding8),
+                    child: Text(
+                     " Intensive IT training, condensed schedule, hands-on learning, prepares for real-world challenges.",
+                      maxLines: 5,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontFamily: "Mulish",
+                        color:
+                        Colors.white.withOpacity(0.6),
+                        fontSize: MediaQuery.of(context)
+                            .size
+                            .width *
+                            0.04,
+                        fontWeight: FontWeight.bold,
                       ),
-                      padding: const EdgeInsets.all(12),
-                      child: Row(
-                        // Wrap Column with Row
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          // Image Widget
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.3,
-                            height: MediaQuery.of(context).size.width * 0.4,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: successState.bootcamps[index].imageUrl !=
-                                    null
-                                ? Image.network(
-                                    successState.bootcamps[index].imageUrl,
-                                    fit: BoxFit.cover,
-                                    loadingBuilder: (BuildContext context,
-                                        Widget child,
-                                        ImageChunkEvent? loadingProgress) {
-                                      if (loadingProgress == null) return child;
-                                      return Shimmer.fromColors(
+                    ),
+                  ),
+                  ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: successState.bootcamps.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: kPadding18, vertical: kPadding8),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            color: kBlack,
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          padding: const EdgeInsets.all(12),
+                          child: Column(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: MediaQuery.of(context).size.width * 0.4,
+                                child: successState.bootcamps[index].imageUrl !=
+                                        null
+                                    ? Image.network(
+                                        successState.bootcamps[index].imageUrl,
+                                        fit: BoxFit.cover,
+                                        loadingBuilder: (BuildContext context,
+                                            Widget child,
+                                            ImageChunkEvent? loadingProgress) {
+                                          if (loadingProgress == null) return child;
+                                          return Shimmer.fromColors(
+                                            baseColor: Colors.grey[300]!,
+                                            highlightColor: Colors.grey[100]!,
+                                            child: Container(
+                                              color: Colors.white,
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : Shimmer.fromColors(
                                         baseColor: Colors.grey[300]!,
                                         highlightColor: Colors.grey[100]!,
                                         child: Container(
                                           color: Colors.white,
                                         ),
-                                      );
-                                    },
-                                  )
-                                : Shimmer.fromColors(
-                                    baseColor: Colors.grey[300]!,
-                                    highlightColor: Colors.grey[100]!,
-                                    child: Container(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                          ),
-                          const SizedBox(
-                              width:
-                                  12), // Add some spacing between image and text
-                          // Column for text content
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    BuildText(
-                                      successState.bootcamps[index].name,
-                                      MediaQuery.of(context).size.width,
-                                      MediaQuery.of(context).size.width * 0.05,
-                                      kWhiteFF,
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      successState.bootcamps[index].description,
-                                      maxLines: 5,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontFamily: "Mulish",
-                                        color: Colors.white.withOpacity(0.6),
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.04,
-                                        fontWeight: FontWeight.bold,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: kPadding18),
-                                const Divider(
-                                  height: 1,
-                                  color: kGrey8E,
-                                ),
-                                InkWell(
-                                  hoverColor: kWhiteF7,
-                                  onTap: () {
-                                    Get.to(
-                                      () => TechBootcampPage(
-                                        reqid: successState.bootcamps[index].id,
-                                      ),
-                                    );
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0),
-                                    child: Row(
+                              ),
+                              const SizedBox(height: 12),
+                              Row(
+                                // Wrap Column with Row
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          "View More",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.04,
-                                            fontWeight: FontWeight.bold,
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            BuildText(
+                                              successState.bootcamps[index].name,
+                                              MediaQuery.of(context).size.width,
+                                              MediaQuery.of(context).size.width *
+                                                  0.05,
+                                              kWhiteFF,
+                                            ),
+                                            const SizedBox(height: 4),
+                                            Text(
+                                              successState
+                                                  .bootcamps[index].description,
+                                              maxLines: 5,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontFamily: "Mulish",
+                                                color:
+                                                    Colors.white.withOpacity(0.6),
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.04,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: kPadding18),
+                                        const Divider(
+                                          height: 1,
+                                          color: kGrey8E,
+                                        ),
+                                        InkWell(
+                                          hoverColor: kWhiteF7,
+                                          onTap: () {
+                                            Get.to(
+                                              () => TechBootcampPage(
+                                                reqid: successState
+                                                    .bootcamps[index].id, regurl: successState.bootcamps[index].website,
+                                              ),
+                                            );
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 8.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "View More",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        0.04,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+                        ),
+                      );
+                    },
+                  ),
+                ],
               );
 
             default:

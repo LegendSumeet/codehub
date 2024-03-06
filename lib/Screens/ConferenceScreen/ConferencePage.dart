@@ -12,7 +12,8 @@ import '../../widgets/SizeConfig.dart';
 
 class ConferencePage extends StatefulWidget {
   final String reqid;
-  const ConferencePage({super.key, required this.reqid});
+  final String regurl;
+  const ConferencePage({super.key, required this.reqid, required this.regurl});
 
   @override
   State<ConferencePage> createState() => _ConferencePageState();
@@ -66,7 +67,10 @@ class _ConferencePageState extends State<ConferencePage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  appinfo.openExternalApplication(
+                      widget.regurl);
+                },
                 child: const Text(
                   'Register Now',
                 ),

@@ -78,137 +78,173 @@ class _HackathonListState extends State<HackathonList> {
               );
             case HackathonsFetchingSuccessfulState:
               final successState = state as HackathonsFetchingSuccessfulState;
-              return ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: successState.hackathons.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: kPadding18, vertical: kPadding8),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: kGrey8E),
-                        color: kBlack,
-                        borderRadius: BorderRadius.circular(18),
+              return SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: kPadding18, vertical: kPadding8),
+                child: Column(
+                  children: [
+                    Text(
+                      'High-energy events where teams collaborate intensively, innovating solutions to challenges within constrained timeframes.',
+                      maxLines: 5,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontFamily: "Mulish",
+                        color: Colors.white.withOpacity(0.6),
+                        fontSize: MediaQuery.of(context).size.width * 0.04,
+                        fontWeight: FontWeight.bold,
                       ),
-                      padding: const EdgeInsets.all(12),
-                      child: Row(
-                        // Wrap Column with Row
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          // Image Widget
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.3,
-                            height: MediaQuery.of(context).size.width * 0.4,
+                    ),
+                    ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: successState.hackathons.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.9,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: kGrey8E),
+                              color: kBlack,
+                              borderRadius: BorderRadius.circular(18),
                             ),
-                            child: successState.hackathons[index].imglink !=
-                                    null
-                                ? Image.network(
-                                    successState.hackathons[index].imglink,
-                                    fit: BoxFit.cover,
-                                    loadingBuilder: (BuildContext context,
-                                        Widget child,
-                                        ImageChunkEvent? loadingProgress) {
-                                      if (loadingProgress == null) return child;
-                                      return Shimmer.fromColors(
-                                        baseColor: Colors.grey[300]!,
-                                        highlightColor: Colors.grey[100]!,
-                                        child: Container(
-                                          color: Colors.white,
-                                        ),
-                                      );
-                                    },
-                                  )
-                                : Shimmer.fromColors(
-                                    baseColor: Colors.grey[300]!,
-                                    highlightColor: Colors.grey[100]!,
-                                    child: Container(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
+                            padding: const EdgeInsets.all(12),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Column(
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: MediaQuery.of(context).size.width * 0.4,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: successState.hackathons[index].imglink !=
+                                          null
+                                      ? Image.network(
+                                          successState.hackathons[index].imglink,
+                                          fit: BoxFit.cover,
+                                          loadingBuilder: (BuildContext context,
+                                              Widget child,
+                                              ImageChunkEvent? loadingProgress) {
+                                            if (loadingProgress == null)
+                                              return child;
+                                            return Shimmer.fromColors(
+                                              baseColor: Colors.grey[300]!,
+                                              highlightColor: Colors.grey[100]!,
+                                              child: Container(
+                                                color: Colors.white,
+                                              ),
+                                            );
+                                          },
+                                        )
+                                      : Shimmer.fromColors(
+                                          baseColor: Colors.grey[300]!,
+                                          highlightColor: Colors.grey[100]!,
+                                          child: Container(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                ),
+                                const SizedBox(height: 12),
+                                Row(
+                                  // Wrap Column with Row
                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    BuildText(
-                                      successState.hackathons[index].name,
-                                      MediaQuery.of(context).size.width,
-                                      MediaQuery.of(context).size.width * 0.05,
-                                      kWhiteFF,
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      successState
-                                          .hackathons[index].description,
-                                      maxLines: 5,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontFamily: "Mulish",
-                                        color: Colors.white.withOpacity(0.6),
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.04,
-                                        fontWeight: FontWeight.bold,
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              BuildText(
+                                                successState
+                                                    .hackathons[index].name,
+                                                MediaQuery.of(context).size.width,
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.05,
+                                                kWhiteFF,
+                                              ),
+                                              const SizedBox(height: 4),
+                                              Text(
+                                                successState.hackathons[index]
+                                                    .description,
+                                                maxLines: 5,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontFamily: "Mulish",
+                                                  color: Colors.white
+                                                      .withOpacity(0.6),
+                                                  fontSize: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.04,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: kPadding18),
+                                          const Divider(
+                                            height: 1,
+                                            color: kGrey8E,
+                                          ),
+                                          InkWell(
+                                            hoverColor: kWhiteF7,
+                                            onTap: () {
+                                              Get.to(
+                                                () => HackathonPage(
+                                                  reqid: successState
+                                                      .hackathons[index].id,
+                                                  regurl: successState
+                                                      .hackathons[index]
+                                                      .registrationLink,
+                                                ),
+                                              );
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  vertical: 8.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    "View More",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.04,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: kPadding18),
-                                const Divider(
-                                  height: 1,
-                                  color: kGrey8E,
-                                ),
-                                InkWell(
-                                  hoverColor: kWhiteF7,
-                                  onTap: () {
-                                    Get.to(
-                                      () => HackathonPage(
-                                        reqid:
-                                            successState.hackathons[index].id,
-                                      ),
-                                    );
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "View More",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.04,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
                               ],
                             ),
                           ),
-                        ],
-                      ),
+                        );
+                      },
                     ),
-                  );
-                },
+                  ],
+                ),
               );
 
             default:

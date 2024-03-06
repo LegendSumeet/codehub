@@ -82,10 +82,9 @@ class _AuthPageState extends State<AuthPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               isLoading
-                                  ? const Icon(
-                                      CupertinoIcons.arrow_clockwise,
-                                      size: 40,
+                                  ? const CircularProgressIndicator(
                                       color: kWhite,
+                                      backgroundColor: kBlack,
                                     )
                                   : const Icon(
                                       CupertinoIcons.mail_solid,
@@ -96,7 +95,7 @@ class _AuthPageState extends State<AuthPage> {
                                   ? Row(
                                       children: [
                                         BuildText(
-                                          "Loading",
+                                          "Loading...",
                                           MediaQuery.of(context).size.width,
                                           22,
                                           kWhiteFF,
@@ -112,7 +111,7 @@ class _AuthPageState extends State<AuthPage> {
                                     )
                                   : //
                                   BuildText(
-                                      "Continue with Goole",
+                                      "Continue with Google",
                                       MediaQuery.of(context).size.width,
                                       22,
                                       kWhiteFF,

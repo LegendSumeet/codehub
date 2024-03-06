@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: kBlack0D,
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                           () => const BootcampsList(),
                           curve: Curves.easeInOutSine,
                           transition: Transition.rightToLeftWithFade,
-                          duration: Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 500),
                         );
                       },
                       child: Container(
@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                           () => const HackathonList(),
                           curve: Curves.easeInOutSine,
                           transition: Transition.rightToLeftWithFade,
-                          duration: Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 500),
                         );
                       },
                       child: Container(
@@ -202,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                           () => const EventList(),
                           curve: Curves.easeInOutSine,
                           transition: Transition.rightToLeftWithFade,
-                          duration: Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 500),
                         );
                       },
                       child: Container(
@@ -240,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                           () => const ConferenceList(),
                           curve: Curves.easeInOutSine,
                           transition: Transition.rightToLeftWithFade,
-                          duration: Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 500),
                         );
                       },
                       child: Container(
@@ -275,12 +275,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(
-                          () => const HackathonList(),
-                          curve: Curves.easeInOutSine,
-                          transition: Transition.rightToLeftWithFade,
-                          duration: Duration(milliseconds: 500),
-                        );
+
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -304,6 +299,15 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(
                                 fontFamily: "Mulish",
                                 color: kWhiteFF,
+                                fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                              ),
+                            ),
+                            Text(
+                              'Coming Soon',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontFamily: "Mulish",
+                                color: Colors.redAccent,
                                 fontSize: SizeConfig.blockSizeHorizontal! * 5,
                               ),
                             ),
@@ -380,7 +384,7 @@ List<Widget> generateGridItemsFromJson(String jsonStr) {
             ),
             curve: Curves.easeInOutSine,
             transition: Transition.rightToLeftWithFade,
-            duration: Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 500),
           );
         },
         child: Container(
@@ -410,7 +414,7 @@ List<Widget> generateGridItemsFromJson(String jsonStr) {
                   ),
                 ),
               ),
-              Divider(
+              const Divider(
                 color: kGreyB7,
               ),
               Image.network(
@@ -462,27 +466,38 @@ class GridItem {
   }
 }
 
-String jsonString = '''
+String jsonString =
+'''
 [
   {
     "title": "Frontend Developer",
-    "imagePath": "https://www.simplilearn.com/ice9/free_resources_article_thumb/full_front_back.jpg",
-    "owner":"roadmap.sh by kamrify",
-    "info":"Step by step guide to becoming an Android developer in 2024",
-    "imglink":"https://miro.medium.com/v2/resize:fit:1358/1*qx9L1NCkuf2-gxT_ZzC-ig.jpeg",
-    "pdflink":"https://roadmap.sh/pdfs/roadmaps/frontend.pdf",
+    "imagePath": "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg",
+    "owner": "roadmap.sh by kamrify",
+    "info": "Step by step guide to becoming a Frontend developer in 2024",
+    "imglink": "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg",
+    "pdflink": "https://roadmap.sh/pdfs/roadmaps/frontend.pdf",
     "ownersite": "https://roadmap.sh/",
     "route": "bootcamp_route1"
   },
   {
-    "title": "FrontEnd Developer",
-    "imagePath": "https://miro.medium.com/v2/resize:fit:1358/1*qx9L1NCkuf2-gxT_ZzC-ig.jpeg",
-    "owner":"roadmap.sh by kamrify",
-    "info":"Step by step guide to becoming an Android developer in 2024",
-    "imglink":"https://miro.medium.com/v2/resize:fit:1358/1*qx9L1NCkuf2-gxT_ZzC-ig.jpeg",
-    "pdflink":"https://roadmap.sh/pdfs/roadmaps/frontend.pdf",
+    "title": "Backend Developer",
+    "imagePath": "https://www.simplilearn.com/ice9/free_resources_article_thumb/How_to_Become_a_Back_End_Developer.jpg",
+    "owner": "roadmap.sh by kamrify",
+    "info": "Step by step guide to becoming a Backend developer in 2024",
+    "imglink": "https://www.simplilearn.com/ice9/free_resources_article_thumb/How_to_Become_a_Back_End_Developer.jpg",
+    "pdflink": "https://roadmap.sh/pdfs/roadmaps/backend.pdf",
     "ownersite": "https://roadmap.sh/",
-    "route": "bootcamp_route1"
+    "route": "bootcamp_route2"
+  },
+  {
+    "title": "Android Developer",
+    "imagePath": "https://huddle.eurostarsoftwaretesting.com/wp-content/uploads/2018/04/Java-or-Android.png",
+    "owner": "roadmap.sh by kamrify",
+    "info": "Step by step guide to becoming an Android developer in 2024",
+    "imglink": "https://huddle.eurostarsoftwaretesting.com/wp-content/uploads/2018/04/Java-or-Android.png",
+    "pdflink": "https://roadmap.sh/pdfs/roadmaps/android.pdf",
+    "ownersite": "https://roadmap.sh/",
+    "route": "bootcamp_route3"
   }
 ]
 ''';
